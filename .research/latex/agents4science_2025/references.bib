@@ -5,3 +5,360 @@
   publisher = {GitHub},
   url       = {https://github.com/airas-org/airas}
 }
+
+% ===========================================
+% REQUIRED CITATIONS
+% These papers must be cited in the manuscript
+% ===========================================
+
+@article{author-year-mambatree,
+ title = {MambaTree: Tree Topology is All You Need in State Space Model}
+}
+
+@article{author-year-vision,
+ title = {Vision Mamba Mender}
+}
+
+@article{dao-2024-transformers,
+ abstract = {While Transformers have been the main architecture behind deep learning's
+success in language modeling, state-space models (SSMs) such as Mamba have
+recently been shown to match or outperform Transformers at small to medium
+scale. We show that these families of models are actually quite closely
+related, and develop a rich framework of theoretical connections between SSMs
+and variants of attention, connected through various decompositions of a
+well-studied class of structured semiseparable matrices. Our state space
+duality (SSD) framework allows us to design a new architecture (Mamba-2) whose
+core layer is an a refinement of Mamba's selective SSM that is 2-8X faster,
+while continuing to be competitive with Transformers on language modeling.},
+ arxiv_url = {https://arxiv.org/pdf/2405.21060v1.pdf},
+ author = {Tri Dao and Albert Gu},
+ github_url = {https://github.com/state-spaces/mamba},
+ title = {Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality},
+ year = {2024}
+}
+
+@article{han-2024-demystify,
+ abstract = {Mamba is an effective state space model with linear computation complexity.
+It has recently shown impressive efficiency in dealing with high-resolution
+inputs across various vision tasks. In this paper, we reveal that the powerful
+Mamba model shares surprising similarities with linear attention Transformer,
+which typically underperform conventional Transformer in practice. By exploring
+the similarities and disparities between the effective Mamba and subpar linear
+attention Transformer, we provide comprehensive analyses to demystify the key
+factors behind Mamba's success. Specifically, we reformulate the selective
+state space model and linear attention within a unified formulation, rephrasing
+Mamba as a variant of linear attention Transformer with six major distinctions:
+input gate, forget gate, shortcut, no attention normalization, single-head, and
+modified block design. For each design, we meticulously analyze its pros and
+cons, and empirically evaluate its impact on model performance in vision tasks.
+Interestingly, the results highlight the forget gate and block design as the
+core contributors to Mamba's success, while the other four designs are less
+crucial. Based on these findings, we propose a Mamba-Inspired Linear Attention
+(MILA) model by incorporating the merits of these two key designs into linear
+attention. The resulting model outperforms various vision Mamba models in both
+image classification and high-resolution dense prediction tasks, while enjoying
+parallelizable computation and fast inference speed. Code is available at
+https://github.com/LeapLabTHU/MLLA.},
+ arxiv_url = {https://arxiv.org/pdf/2405.16605v2.pdf},
+ author = {Dongchen Han and Ziyi Wang and Zhuofan Xia and Yizeng Han and Yifan Pu and Chunjiang Ge and Jun Song and Shiji Song and Bo Zheng and Gao Huang},
+ github_url = {https://github.com/LeapLabTHU/MLLA},
+ title = {Demystify Mamba in Vision: A Linear Attention Perspective},
+ year = {2024}
+}
+
+@article{he-2024-lmm,
+ abstract = {With the success of large language models (LLMs), integrating the vision
+model into LLMs to build vision-language foundation models has gained much more
+interest recently. However, existing LLM-based large multimodal models (e.g.,
+Video-LLaMA, VideoChat) can only take in a limited number of frames for short
+video understanding. In this study, we mainly focus on designing an efficient
+and effective model for long-term video understanding. Instead of trying to
+process more frames simultaneously like most existing work, we propose to
+process videos in an online manner and store past video information in a memory
+bank. This allows our model to reference historical video content for long-term
+analysis without exceeding LLMs' context length constraints or GPU memory
+limits. Our memory bank can be seamlessly integrated into current multimodal
+LLMs in an off-the-shelf manner. We conduct extensive experiments on various
+video understanding tasks, such as long-video understanding, video question
+answering, and video captioning, and our model can achieve state-of-the-art
+performances across multiple datasets. Code available at
+https://boheumd.github.io/MA-LMM/.},
+ arxiv_url = {https://arxiv.org/pdf/2404.05726v2.pdf},
+ author = {Bo He and Hengduo Li and Young Kyun Jang and Menglin Jia and Xuefei Cao and Ashish Shah and Abhinav Shrivastava and Ser-Nam Lim},
+ title = {MA-LMM: Memory-Augmented Large Multimodal Model for Long-Term Video Understanding},
+ year = {2024}
+}
+
+@article{huang-2024-decision,
+ abstract = {Recent works have shown the remarkable superiority of transformer models in
+reinforcement learning (RL), where the decision-making problem is formulated as
+sequential generation. Transformer-based agents could emerge with
+self-improvement in online environments by providing task contexts, such as
+multiple trajectories, called in-context RL. However, due to the quadratic
+computation complexity of attention in transformers, current in-context RL
+methods suffer from huge computational costs as the task horizon increases. In
+contrast, the Mamba model is renowned for its efficient ability to process
+long-term dependencies, which provides an opportunity for in-context RL to
+solve tasks that require long-term memory. To this end, we first implement
+Decision Mamba (DM) by replacing the backbone of Decision Transformer (DT).
+Then, we propose a Decision Mamba-Hybrid (DM-H) with the merits of transformers
+and Mamba in high-quality prediction and long-term memory. Specifically, DM-H
+first generates high-value sub-goals from long-term memory through the Mamba
+model. Then, we use sub-goals to prompt the transformer, establishing
+high-quality predictions. Experimental results demonstrate that DM-H achieves
+state-of-the-art in long and short-term tasks, such as D4RL, Grid World, and
+Tmaze benchmarks. Regarding efficiency, the online testing of DM-H in the
+long-term task is 28$\times$ times faster than the transformer-based baselines.},
+ arxiv_url = {https://arxiv.org/pdf/2406.00079v1.pdf},
+ author = {Sili Huang and Jifeng Hu and Zhejian Yang and Liwei Yang and Tao Luo and Hechang Chen and Lichao Sun and Bo Yang},
+ title = {Decision Mamba: Reinforcement Learning via Hybrid Selective Sequence Modeling},
+ year = {2024}
+}
+
+@article{lee-2024-meteor,
+ abstract = {The rapid development of large language and vision models (LLVMs) has been
+driven by advances in visual instruction tuning. Recently, open-source LLVMs
+have curated high-quality visual instruction tuning datasets and utilized
+additional vision encoders or multiple computer vision models in order to
+narrow the performance gap with powerful closed-source LLVMs. These
+advancements are attributed to multifaceted information required for diverse
+capabilities, including fundamental image understanding, real-world knowledge
+about common-sense and non-object concepts (e.g., charts, diagrams, symbols,
+signs, and math problems), and step-by-step procedures for solving complex
+questions. Drawing from the multifaceted information, we present a new
+efficient LLVM, Mamba-based traversal of rationales (Meteor), which leverages
+multifaceted rationale to enhance understanding and answering capabilities. To
+embed lengthy rationales containing abundant information, we employ the Mamba
+architecture, capable of processing sequential data with linear time
+complexity. We introduce a new concept of traversal of rationale that
+facilitates efficient embedding of rationale. Subsequently, the backbone
+multimodal language model (MLM) is trained to generate answers with the aid of
+rationale. Through these steps, Meteor achieves significant improvements in
+vision language performances across multiple evaluation benchmarks requiring
+diverse capabilities, without scaling up the model size or employing additional
+vision encoders and computer vision models.},
+ arxiv_url = {https://arxiv.org/pdf/2405.15574v4.pdf},
+ author = {Byung-Kwan Lee and Chae Won Kim and Beomchan Park and Yong Man Ro},
+ github_url = {https://github.com/ByungKwanLee/Meteor},
+ title = {Meteor: Mamba-based Traversal of Rationale for Large Language and Vision Models},
+ year = {2024}
+}
+
+@article{liang-2024-pointmamba,
+ abstract = {Transformers have become one of the foundational architectures in point cloud
+analysis tasks due to their excellent global modeling ability. However, the
+attention mechanism has quadratic complexity, making the design of a linear
+complexity method with global modeling appealing. In this paper, we propose
+PointMamba, transferring the success of Mamba, a recent representative state
+space model (SSM), from NLP to point cloud analysis tasks. Unlike traditional
+Transformers, PointMamba employs a linear complexity algorithm, presenting
+global modeling capacity while significantly reducing computational costs.
+Specifically, our method leverages space-filling curves for effective point
+tokenization and adopts an extremely simple, non-hierarchical Mamba encoder as
+the backbone. Comprehensive evaluations demonstrate that PointMamba achieves
+superior performance across multiple datasets while significantly reducing GPU
+memory usage and FLOPs. This work underscores the potential of SSMs in 3D
+vision-related tasks and presents a simple yet effective Mamba-based baseline
+for future research. The code will be made available at
+\url{https://github.com/LMD0311/PointMamba}.},
+ arxiv_url = {https://arxiv.org/pdf/2402.10739v5.pdf},
+ author = {Dingkang Liang and Xin Zhou and Wei Xu and Xingkui Zhu and Zhikang Zou and Xiaoqing Ye and Xiao Tan and Xiang Bai},
+ github_url = {https://github.com/LMD0311/PointMamba},
+ title = {PointMamba: A Simple State Space Model for Point Cloud Analysis},
+ year = {2024}
+}
+
+@article{liu-2024-vmamba,
+ abstract = {Designing computationally efficient network architectures remains an ongoing
+necessity in computer vision. In this paper, we adapt Mamba, a state-space
+language model, into VMamba, a vision backbone with linear time complexity. At
+the core of VMamba is a stack of Visual State-Space (VSS) blocks with the 2D
+Selective Scan (SS2D) module. By traversing along four scanning routes, SS2D
+bridges the gap between the ordered nature of 1D selective scan and the
+non-sequential structure of 2D vision data, which facilitates the collection of
+contextual information from various sources and perspectives. Based on the VSS
+blocks, we develop a family of VMamba architectures and accelerate them through
+a succession of architectural and implementation enhancements. Extensive
+experiments demonstrate VMamba's promising performance across diverse visual
+perception tasks, highlighting its superior input scaling efficiency compared
+to existing benchmark models. Source code is available at
+https://github.com/MzeroMiko/VMamba.},
+ arxiv_url = {https://arxiv.org/pdf/2401.10166v4.pdf},
+ author = {Yue Liu and Yunjie Tian and Yuzhong Zhao and Hongtian Yu and Lingxi Xie and Yaowei Wang and Qixiang Ye and Jianbin Jiao and Yunfan Liu},
+ github_url = {https://github.com/MzeroMiko/VMamba},
+ title = {VMamba: Visual State Space Model},
+ year = {2024}
+}
+
+@article{shi-2024-multi,
+ abstract = {Despite the significant achievements of Vision Transformers (ViTs) in various
+vision tasks, they are constrained by the quadratic complexity. Recently, State
+Space Models (SSMs) have garnered widespread attention due to their global
+receptive field and linear complexity with respect to the input length,
+demonstrating substantial potential across fields including natural language
+processing and computer vision. To improve the performance of SSMs in vision
+tasks, a multi-scan strategy is widely adopted, which leads to significant
+redundancy of SSMs. For a better trade-off between efficiency and performance,
+we analyze the underlying reasons behind the success of the multi-scan
+strategy, where long-range dependency plays an important role. Based on the
+analysis, we introduce Multi-Scale Vision Mamba (MSVMamba) to preserve the
+superiority of SSMs in vision tasks with limited parameters. It employs a
+multi-scale 2D scanning technique on both original and downsampled feature
+maps, which not only benefits long-range dependency learning but also reduces
+computational costs. Additionally, we integrate a Convolutional Feed-Forward
+Network (ConvFFN) to address the lack of channel mixing. Our experiments
+demonstrate that MSVMamba is highly competitive, with the MSVMamba-Tiny model
+achieving 82.8% top-1 accuracy on ImageNet, 46.9% box mAP, and 42.2% instance
+mAP with the Mask R-CNN framework, 1x training schedule on COCO, and 47.6% mIoU
+with single-scale testing on ADE20K.Code is available at
+\url{https://github.com/YuHengsss/MSVMamba}.},
+ arxiv_url = {https://arxiv.org/pdf/2405.14174v1.pdf},
+ author = {Yuheng Shi and Minjing Dong and Chang Xu},
+ github_url = {https://github.com/YuHengsss/MSVMamba},
+ title = {Multi-Scale VMamba: Hierarchy in Hierarchy Visual State Space Model},
+ year = {2024}
+}
+
+@article{xiao-2024-mambatree,
+ abstract = {The state space models, employing recursively propagated features,
+demonstrate strong representation capabilities comparable to Transformer models
+and superior efficiency. However, constrained by the inherent geometric
+constraints of sequences, it still falls short in modeling long-range
+dependencies. To address this issue, we propose the GrootVL network, which
+first dynamically generates a tree topology based on spatial relationships and
+input features. Then, feature propagation is performed based on this graph,
+thereby breaking the original sequence constraints to achieve stronger
+representation capabilities. Additionally, we introduce a linear complexity
+dynamic programming algorithm to enhance long-range interactions without
+increasing computational cost. GrootVL is a versatile multimodal framework that
+can be applied to both visual and textual tasks. Extensive experiments
+demonstrate that our method significantly outperforms existing structured state
+space models on image classification, object detection and segmentation.
+Besides, by fine-tuning large language models, our approach achieves consistent
+improvements in multiple textual tasks at minor training cost.},
+ arxiv_url = {https://arxiv.org/pdf/2406.02395v1.pdf},
+ author = {Yicheng Xiao and Lin Song and Shaoli Huang and Jiangshan Wang and Siyu Song and Yixiao Ge and Xiu Li and Ying Shan},
+ github_url = {https://github.com/EasonXiao-888/GrootVL},
+ title = {MambaTree: Tree Topology is All You Need in State Space Model},
+ year = {2024}
+}
+
+@article{xie-2024-quadmamba,
+ abstract = {Recent advancements in State Space Models, notably Mamba, have demonstrated
+superior performance over the dominant Transformer models, particularly in
+reducing the computational complexity from quadratic to linear. Yet,
+difficulties in adapting Mamba from language to vision tasks arise due to the
+distinct characteristics of visual data, such as the spatial locality and
+adjacency within images and large variations in information granularity across
+visual tokens. Existing vision Mamba approaches either flatten tokens into
+sequences in a raster scan fashion, which breaks the local adjacency of images,
+or manually partition tokens into windows, which limits their long-range
+modeling and generalization capabilities. To address these limitations, we
+present a new vision Mamba model, coined QuadMamba, that effectively captures
+local dependencies of varying granularities via quadtree-based image partition
+and scan. Concretely, our lightweight quadtree-based scan module learns to
+preserve the 2D locality of spatial regions within learned window quadrants.
+The module estimates the locality score of each token from their features,
+before adaptively partitioning tokens into window quadrants. An omnidirectional
+window shifting scheme is also introduced to capture more intact and
+informative features across different local regions. To make the discretized
+quadtree partition end-to-end trainable, we further devise a sequence masking
+strategy based on Gumbel-Softmax and its straight-through gradient estimator.
+Extensive experiments demonstrate that QuadMamba achieves state-of-the-art
+performance in various vision tasks, including image classification, object
+detection, instance segmentation, and semantic segmentation. The code is in
+https://github.com/VISION-SJTU/QuadMamba.},
+ arxiv_url = {https://arxiv.org/pdf/2410.06806v2.pdf},
+ author = {Fei Xie and Weijia Zhang and Zhongdao Wang and Chao Ma},
+ github_url = {https://github.com/VISION-SJTU/QuadMamba},
+ title = {QuadMamba: Learning Quadtree-based Selective Scan for Visual State Space Model},
+ year = {2024}
+}
+
+@article{zhu-2024-vision,
+ abstract = {Recently the state space models (SSMs) with efficient hardware-aware designs,
+i.e., the Mamba deep learning model, have shown great potential for long
+sequence modeling. Meanwhile building efficient and generic vision backbones
+purely upon SSMs is an appealing direction. However, representing visual data
+is challenging for SSMs due to the position-sensitivity of visual data and the
+requirement of global context for visual understanding. In this paper, we show
+that the reliance on self-attention for visual representation learning is not
+necessary and propose a new generic vision backbone with bidirectional Mamba
+blocks (Vim), which marks the image sequences with position embeddings and
+compresses the visual representation with bidirectional state space models. On
+ImageNet classification, COCO object detection, and ADE20k semantic
+segmentation tasks, Vim achieves higher performance compared to
+well-established vision transformers like DeiT, while also demonstrating
+significantly improved computation & memory efficiency. For example, Vim is
+2.8$\times$ faster than DeiT and saves 86.8% GPU memory when performing batch
+inference to extract features on images with a resolution of 1248$\times$1248.
+The results demonstrate that Vim is capable of overcoming the computation &
+memory constraints on performing Transformer-style understanding for
+high-resolution images and it has great potential to be the next-generation
+backbone for vision foundation models. Code is available at
+https://github.com/hustvl/Vim.},
+ arxiv_url = {https://arxiv.org/pdf/2401.09417v3.pdf},
+ author = {Lianghui Zhu and Bencheng Liao and Qian Zhang and Xinlong Wang and Wenyu Liu and Xinggang Wang},
+ github_url = {https://github.com/hustvl/Vim},
+ title = {Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model},
+ year = {2024}
+}
+
+% ===========================================
+% REFERENCE CANDIDATES
+% Additional reference papers for context
+% ===========================================
+
+@article{author-year-imagenet,
+ title = {Imagenet: A large-scale hierarchical image database.}
+}
+
+@article{author-year-mmsegmentation,
+ title = {MMSegmentation: Openmmlab semantic segmentation toolbox and benchmark.}
+}
+
+@article{chen-2019-mmdetection,
+ abstract = {We present MMDetection, an object detection toolbox that contains a rich set
+of object detection and instance segmentation methods as well as related
+components and modules. The toolbox started from a codebase of MMDet team who
+won the detection track of COCO Challenge 2018. It gradually evolves into a
+unified platform that covers many popular detection methods and contemporary
+modules. It not only includes training and inference codes, but also provides
+weights for more than 200 network models. We believe this toolbox is by far the
+most complete detection toolbox. In this paper, we introduce the various
+features of this toolbox. In addition, we also conduct a benchmarking study on
+different methods, components, and their hyper-parameters. We wish that the
+toolbox and benchmark could serve the growing research community by providing a
+flexible toolkit to reimplement existing methods and develop their own new
+detectors. Code and models are available at
+https://github.com/open-mmlab/mmdetection. The project is under active
+development and we will keep this document updated.},
+ arxiv_url = {https://arxiv.org/pdf/1906.07155v1.pdf},
+ author = {Kai Chen and Jiaqi Wang and Jiangmiao Pang and Yuhang Cao and Yu Xiong and Xiaoxiao Li and Shuyang Sun and Wansen Feng and Ziwei Liu and Jiarui Xu and Zheng Zhang and Dazhi Cheng and Chenchen Zhu and Tianheng Cheng and Qijie Zhao and Buyu Li and Xin Lu and Rui Zhu and Yue Wu and Jifeng Dai and Jingdong Wang and Jianping Shi and Wanli Ouyang and Chen Change Loy and Dahua Lin},
+ title = {Mmdetection: Open mmlab detection toolbox and benchmark.},
+ year = {2019}
+}
+
+@article{dai-2021-coatnet,
+ abstract = {Transformers have attracted increasing interests in computer vision, but they
+still fall behind state-of-the-art convolutional networks. In this work, we
+show that while Transformers tend to have larger model capacity, their
+generalization can be worse than convolutional networks due to the lack of the
+right inductive bias. To effectively combine the strengths from both
+architectures, we present CoAtNets(pronounced "coat" nets), a family of hybrid
+models built from two key insights: (1) depthwise Convolution and
+self-Attention can be naturally unified via simple relative attention; (2)
+vertically stacking convolution layers and attention layers in a principled way
+is surprisingly effective in improving generalization, capacity and efficiency.
+Experiments show that our CoAtNets achieve state-of-the-art performance under
+different resource constraints across various datasets: Without extra data,
+CoAtNet achieves 86.0% ImageNet top-1 accuracy; When pre-trained with 13M
+images from ImageNet-21K, our CoAtNet achieves 88.56% top-1 accuracy, matching
+ViT-huge pre-trained with 300M images from JFT-300M while using 23x less data;
+Notably, when we further scale up CoAtNet with JFT-3B, it achieves 90.88% top-1
+accuracy on ImageNet, establishing a new state-of-the-art result.},
+ arxiv_url = {https://arxiv.org/pdf/2106.04803v2.pdf},
+ author = {Zihang Dai and Hanxiao Liu and Quoc V. Le and Mingxing Tan},
+ title = {Coatnet: Marrying convolution and attention for all data sizes.},
+ year = {2021}
+}
