@@ -1,0 +1,12 @@
+# Config for RevMoDiff toy experiments
+seed: 123
+# diffusion steps for training and sampling
+timesteps: 100
+# number of training steps in quick toy runs
+steps_toy: 20
+# batch size for toy runs
+batch_size: 8
+# image size for synthetic data
+img_size: 32
+# enable gating in Experiment 2
+use_gates: true
