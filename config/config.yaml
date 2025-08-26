@@ -1,0 +1,7 @@
+# Default training configuration for RevDR-VM toy experiments
+# Place additional custom files under ./config and point --config to them.
+
+epochs: 4
+batch_size: 128
+lr: 0.0003
+n_class: 5
