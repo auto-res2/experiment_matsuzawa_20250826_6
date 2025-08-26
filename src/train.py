@@ -61,8 +61,10 @@ class DDPMHelper:
     def q_sample(self, x0: torch.Tensor, t: torch.Tensor, noise: Optional[torch.Tensor] = None) -> torch.Tensor:
         if noise is None:
             noise = torch.randn_like(x0)
-        sqrt_ac = self.sqrt_alphas_cumprod[t].view(-1, 1, 1, 1)
-        sqrt_om = self.sqrt_one_minus_alphas_cumprod[t].view(-1, 1, 1, 1)
+        # Ensure buffers are on the same device as the inputs for safe indexing and math
+        buf_dev = t.device
+        sqrt_ac = self.sqrt_alphas_cumprod.to(buf_dev)[t].view(-1, 1, 1, 1)
+        sqrt_om = self.sqrt_one_minus_alphas_cumprod.to(buf_dev)[t].view(-1, 1, 1, 1)
         return sqrt_ac * x0 + sqrt_om * noise
 
     def t_embedding(self, t: torch.Tensor, dim: int = 64) -> torch.Tensor:

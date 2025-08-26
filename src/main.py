@@ -13,7 +13,7 @@ import math
 
 import torch
 
-from .preprocess import seed_all, make_dataloaders, ensure_dir
+from .preprocess import seed_all, make_dataloaders, ensure_dir, get_device
 from .train import (
     RevMoDiff, TinyUNet, TrainConfig, train_one_model, count_parameters,
     save_loss_plot, save_bar_plot, save_image_grid_pdf,
@@ -23,7 +23,7 @@ from .evaluate import (
 )
 
 
-FIG_DIR = os.path.join('.research', 'iteration2', 'images')
+FIG_DIR = os.path.join('.research', 'iteration3', 'images')
 ensure_dir(FIG_DIR)
 MODEL_DIR = os.path.join('models')
 ensure_dir(MODEL_DIR)
@@ -92,7 +92,8 @@ def experiment_2_toy(cfg_dict):
 
     rev_gated = RevMoDiff(img_ch=3, base_ch=32, hidden_group=32, num_cols=3, num_blocks_per_col=2, groups=2,
                           timesteps=timesteps, text_dim=0, use_gates=True)
-    device = next(rev_gated.parameters()).device
+    device = get_device()
+    rev_gated.to(device)
 
     opt = torch.optim.AdamW(rev_gated.parameters(), lr=2e-3)
     scaler = torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())

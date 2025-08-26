@@ -34,9 +34,10 @@ def simple_sampler(model: RevMoDiff, shape: Tuple[int, int, int, int], steps: in
     device = next(model.parameters()).device
     B, C, H, W = shape
     x = torch.randn(B, C, H, W, device=device)
-    betas = model.diff.betas
-    alphas = model.diff.alphas
-    alphas_cum = model.diff.alphas_cumprod
+    # Ensure diffusion buffers are on the correct device for indexing and math
+    betas = model.diff.betas.to(device)
+    alphas = model.diff.alphas.to(device)
+    alphas_cum = model.diff.alphas_cumprod.to(device)
     for i in reversed(range(steps)):
         t = torch.full((B,), i, device=device, dtype=torch.long)
         with autocast_if_cuda():
