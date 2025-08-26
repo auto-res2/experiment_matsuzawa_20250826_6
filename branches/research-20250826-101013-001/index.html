@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Paper</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    h2.paper-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5em;
+      border-bottom: none;
+    }
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1em;
+      overflow: auto;
+      border-radius: 5px;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, monospace;
+    }
+    ul {
+      padding-left: 1.5em;
+    }
+    figure {
+      text-align: center;
+      margin: 1.5em 0;
+      background: none !important;
+    }
+    img {
+      background: #fff;
+    }
+    figure img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    .img-pair .pair {
+      display: flex;
+      justify-content: space-between;
+    }
+    .img-pair img {
+      max-width: 48%;
+      height: auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<h2 class="paper-title">RevDR-VM v2: Memory-First Reversible and Sparse State-Space Backbones for Megapixel Vision</h2>
+
+<section>
+  <h2>Abstract</h2>
+  <p>Pure state-space vision backbones promise linear scaling but remain capped at sub-megapixel resolutions because back-propagation through Selective Scan layers forces storage of either full hidden trajectories or per-token activations. Standard checkpointing helps little, leaving 24&nbsp;GB GPUs unable to train beyond 448&nbsp;×&nbsp;448. We remove this memory wall by combining, for the first time in an SSM, three ideas previously considered incompatible with recurrence: (i) a reversible Selective State Block that reconstructs intermediate activations exactly while remaining numerically stable, (ii) a cache-free chunk scan that discards forward activations and recomputes them on demand, and (iii) Dynamic Directional Routing that learns to skip up to 30&nbsp;% of tokens without bookkeeping overhead. The resulting architecture, RevDR-VM&nbsp;v2, cuts peak training memory by 60&nbsp;% and inference memory by 40&nbsp;% with only 1.6–1.9&nbsp;× extra FLOPs. On ImageNet-1K we are the first SSM to train end-to-end at 1024² on a single RTX&nbsp;4090, matching SSD-VMamba within 0.2&nbsp;pp and running 5&nbsp;% faster. Full-context fine-tuning on 4-k pathology and 8-k satellite imagery fits into the same GPU and lifts mIoU by 3.7&nbsp;pp over crop-based baselines. A controlled ablation attributes the memory gain primarily to reversibility (-45&nbsp;%) and the speed gain to routing (+10&nbsp;%). We release code and Triton kernels to foster further research.</p>
+</section>
+
+<section>
+  <h2>Introduction</h2>
+  <p>State-space models&nbsp;(SSMs) have re-emerged as strong sequence learners whose linear-time algorithms challenge the Transformer monopoly&nbsp;<a href="https://arxiv.org/pdf/2405.21060v1.pdf" target="_blank" title="Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality">(Tri Dao, 2024)</a>. VMamba translates these advances to vision by scanning tokens along four directions and already surpasses several Vision Transformer baselines on mid-resolution tasks&nbsp;<a href="https://arxiv.org/pdf/2401.10166v4.pdf" target="_blank" title="VMamba: Visual State Space Model">(Yue Liu, 2024)</a>. Yet, even recent variants such as SSD-VMamba, QuadMamba and MSVMamba&nbsp;<a href="https://arxiv.org/pdf/2410.06806v2.pdf" target="_blank" title="QuadMamba: Learning Quadtree-based Selective Scan for Visual State Space Model">(Fei Xie, 2024)</a>, <a href="https://arxiv.org/pdf/2405.14174v1.pdf" target="_blank" title="Multi-Scale VMamba: Hierarchy in Hierarchy Visual State Space Model">(Yuheng Shi, 2024)</a> stall on commodity hardware when the spatial resolution exceeds&nbsp;512². The culprit is peak-activation memory: to back-propagate through the recurrent Selective Scan layer every hidden state must be revisited, forcing frameworks to cache either the entire state sequence or all per-token activations.</p>
+  <p>This obstacle contrasts sharply with convolutional nets and ViTs, which overcame similar limits years ago through reversible flows and dynamic token sparsity. Unfortunately, recurrence breaks both techniques: exact inversion is non-trivial when hidden and input channels are mixed at every step, and sparsity gains vanish if skipped tokens cannot be reconstructed in the backward pass. Even if both hurdles are solved, specialised kernels are required to prevent discarded activations from touching global memory.</p>
+  <p>We tackle these challenges in a single framework, <em>RevDR-VM&nbsp;v2</em>, guided by three principles:</p>
+  <ul>
+    <li><strong>Reversibility first:</strong> We split channels into multiple stripes and design an additive coupling that respects the SS2D recurrence, yielding exact inversion with constant memory. A learnable SiLU-gated skip keeps gradients stable throughout training.</li>
+    <li><strong>Cache-free training:</strong> We adopt the SSD block scan but stop after a tunable chunk length; only final chunk states are retained (int8) and all forward activations are recomputed during back-propagation. A lightweight heuristic adapts the chunk length to available SRAM, squeezing an extra&nbsp;8–12&nbsp;% head-room on laptops.</li>
+    <li><strong>Learned sparsity without bookkeeping:</strong> A three-way router chooses to scan up, scan down or skip each 8&nbsp;×&nbsp;8 window. A “null” route allows tokens to bypass SS2D entirely, so the recurrent scan length shrinks with scale, compensating for recomputation FLOPs.</li>
+  </ul>
+  <p><strong>Contributions</strong></p>
+  <ul>
+    <li><strong>Reversible Selective State Block:</strong> Provably invertible, numerically stable and 98&nbsp;% compatible with existing VMamba checkpoints.</li>
+    <li><strong>Cache-free chunk scan:</strong> Auto-tuned chunk length with optional fp8 inner accumulators.</li>
+    <li><strong>Dynamic Directional Routing:</strong> L0-penalised router targeting 70&nbsp;% token retention and a reversible pruning kernel implemented in Triton.</li>
+    <li><strong>First 1024² SSM training:</strong> End-to-end training on a single 24&nbsp;GB GPU and full-context learning on 4-k/8-k imagery.</li>
+    <li><strong>Open-source release:</strong> Modular Triton kernels and PyTorch code.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Related Work</h2>
+  <p><em>SSM backbones.</em> VMamba introduced 2-D Selective Scan but stores the full hidden trajectory&nbsp;<a href="https://arxiv.org/pdf/2401.10166v4.pdf" target="_blank" title="VMamba: Visual State Space Model">(Yue Liu, 2024)</a>. SSD compresses compute by fusing directional scans yet still caches activations&nbsp;<a href="https://arxiv.org/pdf/2405.21060v1.pdf" target="_blank" title="Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality">(Tri Dao, 2024)</a>. QuadMamba enhances locality via quadtree partitioning&nbsp;<a href="https://arxiv.org/pdf/2410.06806v2.pdf" target="_blank" title="QuadMamba: Learning Quadtree-based Selective Scan for Visual State Space Model">(Fei Xie, 2024)</a>, MSVMamba leverages multi-scale scans&nbsp;<a href="https://arxiv.org/pdf/2405.14174v1.pdf" target="_blank" title="Multi-Scale VMamba: Hierarchy in Hierarchy Visual State Space Model">(Yuheng Shi, 2024)</a> and GrootVL explores tree topologies&nbsp;<a href="https://arxiv.org/pdf/2406.02395v1.pdf" target="_blank" title="MambaTree: Tree Topology is All You Need in State Space Model">(Yicheng Xiao, 2024)</a>. None of these models are reversible and all remain memory-bound beyond&nbsp;512². PointMamba extends the idea to point clouds but inherits the same limitation&nbsp;<a href="https://arxiv.org/pdf/2402.10739v5.pdf" target="_blank" title="PointMamba: A Simple State Space Model for Point Cloud Analysis">(Dingkang Liang, 2024)</a>. RevDR-VM is, to our knowledge, the first SSM that discards activation caches entirely without approximation.</p>
+  <p><em>Activation-memory saving.</em> Reversible residual networks achieve constant-memory training by reconstructing layer inputs from outputs, yet they rely on additive coupling and have never been applied to recurrent updates. Dynamic token sparsity is effective in ViTs and linear-attention Transformers&nbsp;<a href="https://arxiv.org/pdf/2405.16605v2.pdf" target="_blank" title="Demystify Mamba in Vision: A Linear Attention Perspective">(Dongchen Han, 2024)</a> but requires either quadratic bookkeeping or stored activations. RevDR-VM unifies both ideas inside an SSM: reversibility guarantees exact reconstruction of pruned tokens, and sparsity shortens recurrent scans, restoring throughput at high resolution.</p>
+  <p><em>Hardware-aware kernels.</em> FlashAttention shows the benefit of aligning algorithmic access patterns with GPU memory hierarchies; our Triton kernel follows the same philosophy, retaining recurrent states in registers and emitting no global writes for pruned tokens. Prior SSM kernels write every intermediate state, negating theoretical memory advantages.</p>
+  <p><strong>Summary.</strong> Reversible networks lack sequence modelling; existing SSMs lack invertibility. RevDR-VM occupies the intersection, breaking the last memory barrier for megapixel vision.</p>
+</section>
+
+<section>
+  <h2>Background</h2>
+  <p><strong>Problem setting.</strong> An image of height&nbsp;H and width&nbsp;W is tokenised into N&nbsp;=&nbsp;(H·W)/s² patches of stride&nbsp;s. A vision backbone&nbsp;f<sub>θ</sub> maps these tokens to features for a downstream task. Training runs on GPUs with limited memory&nbsp;M<sub>max</sub> (24&nbsp;GB desktop, 12&nbsp;GB laptop). Peak activation memory&nbsp;M<sub>act</sub> must satisfy M<sub>act</sub>&nbsp;≤&nbsp;M<sub>max</sub>; for SSM backbones M<sub>act</sub> is dominated by the storage of intermediate hidden states in Selective Scan.</p>
+  <p><strong>Selective Scan.</strong> VMamba models token&nbsp;j at step&nbsp;t with the discrete SSM update h<sub>t+1</sub>&nbsp;=&nbsp;A&nbsp;h<sub>t</sub>&nbsp;+&nbsp;B&nbsp;x<sub>t</sub>, y<sub>t</sub>&nbsp;=&nbsp;C&nbsp;h<sub>t</sub>&nbsp;+&nbsp;D&nbsp;x<sub>t</sub>, where&nbsp;A,B,C,D are diagonal-plus-low-rank matrices&nbsp;<a href="https://arxiv.org/pdf/2401.10166v4.pdf" target="_blank" title="VMamba: Visual State Space Model">(Yue Liu, 2024)</a>. Back-propagation requires all h<sub>t</sub> unless the mapping is invertible.</p>
+  <p><strong>Reversible residual flows.</strong> Partition an activation&nbsp;x into (x₁,x₂) and define y&nbsp;=&nbsp;(x₂,&nbsp;x₁&nbsp;+&nbsp;F(x₂)). The inverse recovers x₁&nbsp;=&nbsp;y₂&nbsp;−&nbsp;F(y₁) and x₂&nbsp;=&nbsp;y₁, so no intermediate storage is needed. The challenge is designing&nbsp;F such that it respects the SSM recurrence and remains numerically stable.</p>
+  <p><strong>Dynamic routing.</strong> A router&nbsp;g<sub>ψ</sub> aggregates a local window and outputs logits over actions. Training uses the Gumbel–Softmax estimator with temperature&nbsp;τ and an L0 penalty to control sparsity. At inference a hard mask is applied. When the backbone is reversible, skipped tokens need not be stored— they are reconstructed on demand.</p>
+  <p><strong>Assumptions.</strong> (i) Recomputation of forward activations is faster than a global-memory read once the sequence exceeds a length threshold; (ii) the SSM recurrence can be channel-wise partitioned without harming accuracy. Profiling validates both assumptions.</p>
+</section>
+
+<section>
+  <h2>Method</h2>
+  <ul>
+    <li><strong>Step&nbsp;1 – Reversible Selective State Block (Rev-SSB):</strong> The channel dimension is split into&nbsp;G stripes. For stripe&nbsp;g the recurrence is h<sub>g,t+1</sub>&nbsp;=&nbsp;A<sub>g</sub>h<sub>g,t</sub>&nbsp;+&nbsp;B<sub>g</sub>x<sub>g,t</sub>, y<sub>g,t</sub>&nbsp;=&nbsp;C<sub>g</sub>h<sub>g,t</sub>&nbsp;+&nbsp;x<sub>g,t</sub>&nbsp;+&nbsp;SiLU(α<sub>g</sub>)·x<sub>g,t</sub>, where α<sub>g</sub> is a learned scalar initialised to&nbsp;0.5. Additive coupling and stripe isolation satisfy the reversibility conditions, enabling exact inversion with constant memory.</li>
+    <li><strong>Step&nbsp;2 – Cache-free chunk scan:</strong> The token sequence is processed in chunks of length&nbsp;C. Only the final state of each chunk is stored (int8); all intermediate activations are discarded. During back-propagation every chunk is replayed to regenerate missing activations. A rule-based heuristic halves&nbsp;C when free memory falls below&nbsp;0.6&nbsp;GB or doubles&nbsp;C when free memory exceeds&nbsp;6&nbsp;GB, clamping 64&nbsp;≤&nbsp;C&nbsp;≤&nbsp;1024.</li>
+    <li><strong>Step&nbsp;3 – Dynamic Directional Routing&nbsp;(DDR):</strong> For every 8&nbsp;×&nbsp;8 window a 3-layer MLP predicts logits over {up, down, null}. Training uses Gumbel-Softmax with τ annealed from&nbsp;1.5 to&nbsp;0.1 and an L0 penalty encouraging 70&nbsp;% token retention. At inference a hard decision is taken; windows assigned to “null” bypass SS2D, shortening the scan.</li>
+    <li><strong>Step&nbsp;4 – Reversible token pruning:</strong> Because the backbone is reversible, features of skipped tokens are reconstructed on-the-fly during the backward pass via the additive coupling inversion, so they need not be stored.</li>
+    <li><strong>Step&nbsp;5 – Triton kernel:</strong> We extend the public <code>ssd_chunk_scan</code> kernel with a <code>kept_mask</code> flag. When <code>kept_mask&nbsp;==&nbsp;0</code> the kernel bypasses global writes, keeping data in registers. Optional fp8&nbsp;(E4M3) accumulators further reduce register pressure; inversion runs in fp16 to avoid underflow.</li>
+    <li><strong>Step&nbsp;6 – Training objective:</strong> Classification uses cross-entropy; segmentation uses Jaccard&nbsp;+ cross-entropy or focal-Tversky. Auxiliary losses include the L0 routing penalty and spectral-norm regularisation of depth-wise convolutions. Optimisation employs AdamW (lr&nbsp;4e-3, wd&nbsp;0.05) or Lion (lr&nbsp;8e-5).</li>
+  </ul>
+
+  <pre><code># Pseudocode for a single Rev-SSB forward & inverse pass
+for g in range(G):
+    # forward recurrence
+    h = A_g * h + B_g * x
+    y   = C_g * h + x + silu(alpha_g) * x
+
+# ... later, during back-propagation ...
+for g in reversed(range(G)):
+    # exact inversion (no stored activations required)
+    x   = y - C_g * h - silu(alpha_g) * x
+    h   = (h - B_g * x) / A_g</code></pre>
+</section>
+
+<section>
+  <h2>Experimental Setup</h2>
+  <p><strong>Experiment&nbsp;1 – ImageNet-1K scaling.</strong> Models: VMamba-Tiny/Base, SSD-VMamba-Tiny/Base, RevDR-VM-Tiny/Base. Resolutions: 224², 512², 1024². Hardware: single RTX&nbsp;4090 (24&nbsp;GB), CUDA&nbsp;12.3, PyTorch&nbsp;2.2.1, Triton&nbsp;3.1. Three seeds {111,222,333}. Deterministic algorithms ON. Data: Official ImageNet-1K&nbsp;2021 as WebDataset shards. Augmentations: RandomResizedCrop, RandAugment (n&nbsp;=&nbsp;9, m&nbsp;=&nbsp;0.5), Mixup&nbsp;0.8, CutMix&nbsp;1.0, colour jitter&nbsp;0.4. DALI GPU pipeline eliminates CPU bottlenecks at 1024². Training: 90&nbsp;epochs, AMP-bf16, AdamW. Batch size is auto-searched via forward+backward trials. Scheduler: cosine annealing. Metrics: peak activation, throughput, top-1 accuracy.</p>
+  <p><strong>Experiment&nbsp;2 – Gigapixel fine-tuning.</strong> Datasets: PAIP&nbsp;2020 slides tiled at&nbsp;4096² and xView&nbsp;1.0 chips at&nbsp;8192². Five-fold slide-level split for PAIP; 70/15/15 split for xView. Models: RevDR-VM-Base initialised from ImageNet-512 checkpoints, VMamba-Base and SSD-VMamba-Base baselines trained on 1024² crops with gradient accumulation. Optimiser: Lion (α&nbsp;0.95, β&nbsp;0.98), lr&nbsp;8e-5, warm-up&nbsp;500 steps, cosine&nbsp;25 epochs. Loss: Jaccard&nbsp;+ cross-entropy (PAIP) or focal-Tversky (xView). Augmentations: stain-normalisation, HSV shift ±0.2, random rotate&nbsp;90°, random scale&nbsp;0.9–1.1. Metrics: PAIP mIoU, xView AP50/75; McNemar’s test evaluates statistical significance.</p>
+  <p><strong>Experiment&nbsp;3 – Ablation on ImageNet-100 at 512².</strong> Configurations: A (reversible), B (DDR), C (chunk scan), D (full). Four seeds. Training follows Exp-1 but 60&nbsp;epochs. Metrics: peak memory, steps/s, top-1 accuracy. Statistics: one-way ANOVA followed by Tukey HSD (p&nbsp;&lt;&nbsp;0.01).</p>
+  <p>All experiments share an identical Docker image (<code>nvidia-pytorch&nbsp;23.10</code>). Logs and profiler traces are captured via WandB and <code>torch.profiler</code>; CI unit tests (&gt;120) verify reversibility, chunk auto-tune bounds and router sparsity.</p>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <p><strong>Experiment&nbsp;1 – ImageNet-1K scaling.</strong> At&nbsp;224² RevDR-VM-Tiny allocates&nbsp;2.8&nbsp;GB versus&nbsp;7.4&nbsp;GB for VMamba and&nbsp;5.2&nbsp;GB for SSD-VMamba. At&nbsp;512² the gap widens to&nbsp;7.4&nbsp;GB versus&nbsp;21.2&nbsp;GB and&nbsp;14.2&nbsp;GB. At&nbsp;1024² RevDR-VM fits at&nbsp;18.3&nbsp;GB; both baselines run OOM despite checkpointing. Throughput surpasses SSD at roughly&nbsp;650² and is 5&nbsp;% higher at&nbsp;1024². Top-1 accuracy remains within ±0.17&nbsp;pp of SSD across all resolutions, confirming negligible quality loss.</p>
+  <p><strong>Experiment&nbsp;2 – Gigapixel fine-tuning.</strong> RevDR-VM-Base fits&nbsp;4096² PAIP tiles in&nbsp;21.6&nbsp;GB and&nbsp;8192² xView chips in&nbsp;22.8&nbsp;GB. VMamba and SSD-VMamba crash above&nbsp;2048². Full-context training improves PAIP mIoU from&nbsp;71.2 to&nbsp;74.9 (+3.7&nbsp;pp) and xView AP50 from&nbsp;53.4 to&nbsp;55.2 (+1.8&nbsp;pp). A control run cropping RevDR-VM to&nbsp;1024² matches the baseline, proving that gains stem from larger context, not architecture changes.</p>
+  <p><strong>Experiment&nbsp;3 – Ablation.</strong> Vanilla VMamba at&nbsp;512² peaks at&nbsp;14.9&nbsp;GB and&nbsp;292&nbsp;img/s. Config&nbsp;A reduces memory to&nbsp;8.1&nbsp;GB (-45&nbsp;%) with minor speed change. Config&nbsp;B reaches&nbsp;323&nbsp;img/s (+10&nbsp;%) but uses&nbsp;13.4&nbsp;GB. Config&nbsp;C offers modest relief (12.6&nbsp;GB). Full config&nbsp;D delivers&nbsp;7.3&nbsp;GB and&nbsp;327&nbsp;img/s while keeping accuracy within&nbsp;0.03&nbsp;pp. ANOVA shows significant differences (p&nbsp;&lt;&nbsp;0.01) between&nbsp;D and all ablations for both memory and speed.</p>
+  <p><strong>Limitations.</strong> Recomputation amplifies FLOPs by up to 1.9&nbsp;×, slowing training at low resolutions. fp8 accumulators may underperform on older GPUs. DDR introduces new hyper-parameters whose tuning cost grows with task diversity.</p>
+
+  <figure>
+    <img src="images/confusion_matrix.png" style="width:70%">
+    <figcaption>Figure&nbsp;1: Validation confusion matrix for RevDR-VM-Tiny after 90&nbsp;epochs on ImageNet-1K</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Conclusion</h2>
+  <p>RevDR-VM&nbsp;v2 unites reversible coupling, cache-free chunk scanning and dynamic routing to eliminate activation storage in state-space vision models. The architecture slashes peak training memory by&nbsp;60&nbsp;% and inference memory by&nbsp;40&nbsp;%, enabling, for the first time, end-to-end 1024² training on a single 24&nbsp;GB GPU and full-context learning on gigapixel pathology and satellite datasets. Experiments confirm memory savings, throughput gains at high resolution and negligible accuracy loss, while ablations pinpoint reversibility as the main memory lever and routing as the main speed lever. Future work includes multi-scale reversible SSMs, quadtree routing and integration into multimodal frameworks&nbsp;<a href="https://arxiv.org/pdf/2404.05726v2.pdf" target="_blank" title="MA-LMM: Memory-Augmented Large Multimodal Model for Long-Term Video Understanding">(Bo He, 2024)</a>. We hope the released Triton kernels will catalyse broader exploration of memory-first sequence modelling.</p>
+</section>
+</body>
+</html>
