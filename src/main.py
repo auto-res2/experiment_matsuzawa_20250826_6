@@ -23,7 +23,7 @@ from .evaluate import (
 )
 
 
-FIG_DIR = os.path.join('.research', 'iteration1', 'images')
+FIG_DIR = os.path.join('.research', 'iteration2', 'images')
 ensure_dir(FIG_DIR)
 MODEL_DIR = os.path.join('models')
 ensure_dir(MODEL_DIR)
@@ -142,7 +142,7 @@ def experiment_2_toy(cfg_dict):
     # Sample a small grid with and without gates
     imgs_full = simple_sampler(rev_gated, shape=(8, 3, cfg_dict.get('img_size', 32), cfg_dict.get('img_size', 32)), steps=20, use_gates=False)
     save_image_grid_pdf(imgs_full, os.path.join(FIG_DIR, 'samples_full_depth.pdf'), nrow=4)
-    imgs_gated = simple_sampler(rev_gated, shape=(8, 3, cfg_dict.get('img_size', 32), cfg_dict.get('img_size', 32')), steps=20, use_gates=True)
+    imgs_gated = simple_sampler(rev_gated, shape=(8, 3, cfg_dict.get('img_size', 32), cfg_dict.get('img_size', 32)), steps=20, use_gates=True)
     save_image_grid_pdf(imgs_gated, os.path.join(FIG_DIR, 'samples_gated.pdf'), nrow=4)
 
 
