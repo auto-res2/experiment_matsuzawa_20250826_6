@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 159, in _get_module_details
+  File "<frozen importlib._bootstrap_external>", line 1074, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1004, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py", line 145
+    imgs_gated = simple_sampler(rev_gated, shape=(8, 3, cfg_dict.get('img_size', 32), cfg_dict.get('img_size', 32')), steps=20, use_gates=True)
+                                                                                                                 ^
+SyntaxError: unterminated string literal (detected at line 145)
