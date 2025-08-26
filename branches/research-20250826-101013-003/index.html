@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Paper</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    h2.paper-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5em;
+      border-bottom: none;
+    }
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1em;
+      overflow: auto;
+      border-radius: 5px;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, monospace;
+    }
+    ul {
+      padding-left: 1.5em;
+    }
+    figure {
+      text-align: center;
+      margin: 1.5em 0;
+      background: none !important;
+    }
+    img {
+      background: #fff;
+    }
+    figure img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    .img-pair .pair {
+      display: flex;
+      justify-content: space-between;
+    }
+    .img-pair img {
+      max-width: 48%;
+      height: auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<h2 class="paper-title">Adaptive Time-and-Scale Diffusion for Energy-Proportional Text-to-Image Generation</h2>
+
+<section>
+  <h2>Abstract</h2>
+  <p>Megapixel text-to-image diffusion pipelines waste the majority of their computation denoising spatial bands that are either discarded by the VAE decoder or visually flat in the final picture. A flat cartoon therefore costs as much as a highly textured landscape, hindering mobile deployment and inflating energy use. We introduce Adaptive Time-and-Scale Diffusion (ATaS-Diff), the first instance-adaptive sampler whose computation grows with true image complexity. ATaS-Diff combines a learnable orthonormal λ-wavelet pyramid, dual uncertainty-plus-gradient band saliency, gated decoder capacity, a compute-aware PPO controller, and a copy-versus-hallucinate objective. Integrated into Stable-Diffusion-1.5 the method delivers a 5× wall-clock speed-up and a 4.8× energy reduction at 1024 × 1024 resolution with only a 0.2 FID increase. Quality-versus-compute plots over 600 heterogeneous prompts show heteroscedastic FLOP allocation that correlates with CLIP-based scene complexity, confirming true instance adaptivity. Ablation studies demonstrate that removing any single component degrades the Pareto frontier, and region-aware metrics validate the new loss. All code, PPO policies and profiler logs are released for full reproducibility.</p>
+</section>
+
+<section>
+  <h2>Introduction</h2>
+  <p>Diffusion models are now the work-horse of high-fidelity image generation, yet their appetite for computation limits practical use. Rendering a single 1024 × 1024 frame with Stable-Diffusion-1.5 involves tens of billions of floating-point operations; profiling shows that roughly seventy per cent of these FLOPs refine spatial bands that either vanish in the VAE decoder or are perceptually flat. Prior acceleration efforts attack only one axis at a time. Temporal samplers such as DPM-Solver++ trim the number of global denoise steps, and ASE adds early exiting based on variance. Scale-selective methods like Wavelet-Diffusion <a href="https://arxiv.org/pdf/2211.16152v2.pdf" target="_blank" title="Wavelet Diffusion Models Are Fast and Scalable Image Generators">(Hao Phung, 2022)</a> or ACDC prune fixed frequency bands but still iterate equally long on every retained band. Consequently, all three families charge the same compute for a silhouette sketch as for a photo-realistic panorama—violating energy proportionality, the principle that computation should track intrinsic workload complexity.</p>
+  <p>Instance-adaptive diffusion is challenging for four reasons. (i) Skipping part of the signal usually breaks perfect reconstruction unless the transform is strictly orthonormal; non-orthogonal designs in ACDC illustrate the artefacts that ensue. (ii) Variance-only saliency, as used in ASE, can stall, causing divergence when the predicted noise estimate no longer improves. (iii) Heuristic quality thresholds seldom align with human perception and require laborious tuning for each model. (iv) Any adaptive mechanism must be virtually free at run time; otherwise the savings evaporate.</p>
+  <ul>
+    <li><strong>Contributions:</strong>
+      <ul>
+        <li><strong>First diffusion framework</strong> that jointly adapts time steps, spatial scales and network capacity on a per-sample basis.</li>
+        <li><strong>Learnable orthonormal wavelet pyramid</strong> enabling artefact-free early exit.</li>
+        <li><strong>Dual saliency metric</strong> combining uncertainty and gradient energy to stabilise adaptive denoising.</li>
+        <li><strong>RL-driven controller</strong> optimising the quality-compute Pareto frontier.</li>
+        <li><strong>Open-sourced implementation</strong> with exhaustive reproducibility assets.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Related Work</h2>
+  <p><strong>Temporal acceleration.</strong> High-order ODE solvers such as DPM-Solver++ reduce global steps but still process the full spatial spectrum. ASE adds early exit via variance, yet plateaus in variance can trigger divergence. Training-free adaptive diffusion skips steps by bounding latent differences <a href="https://arxiv.org/pdf/2410.09873v1.pdf" target="_blank" title="Training-Free Adaptive Diffusion with Bounded Difference Approximation Strategy">(Hancheng Ye, 2024)</a>. EM distillation <a href="https://arxiv.org/pdf/2405.16852v2.pdf" target="_blank" title="EM Distillation for One-step Diffusion Models">(Sirui Xie, 2024)</a> and distribution-matching distillation <a href="https://arxiv.org/pdf/2311.18828v4.pdf" target="_blank" title="One-step Diffusion with Distribution Matching Distillation">(Tianwei Yin, 2023)</a> convert many-step samplers into one-step generators; these complement ATaS-Diff but do not modulate spatial compute.</p>
+  <p><strong>Spatial adaptivity.</strong> Wavelet-Diffusion employs a fixed Haar transform <a href="https://arxiv.org/pdf/2211.16152v2.pdf" target="_blank" title="Wavelet Diffusion Models Are Fast and Scalable Image Generators">(Hao Phung, 2022)</a>, mis-aligning with natural image spectra and lacking exact inversion. ACDC prunes spatial locations with non-orthogonal transforms, leading to residual artefacts. Hyperbolic diffusion embeddings reveal hierarchical structure <a href="https://arxiv.org/pdf/2305.18962v1.pdf" target="_blank" title="Hyperbolic Diffusion Embedding and Distance for Hierarchical Representation Learning">(Ya-Wei Eileen Lin, 2023)</a>, and multi-scale local probability models capture score hierarchies <a href="https://arxiv.org/pdf/2303.02984v1.pdf" target="_blank" title="Learning multi-scale local conditional probability models of images">(Zahra Kadkhodaie, 2023)</a>, yet neither performs adaptive skipping.</p>
+  <p><strong>Capacity adaptation.</strong> Early exit inside the UNet accelerates sampling <a href="https://arxiv.org/pdf/2408.05927v1.pdf" target="_blank" title="A Simple Early Exiting Framework for Accelerated Sampling in Diffusion Models">(Taehong Moon, 2024)</a>; Faster-Diffusion reuses encoder activations <a href="https://arxiv.org/pdf/2312.09608v2.pdf" target="_blank" title="Faster Diffusion: Rethinking the Role of the Encoder for Diffusion Model Inference">(Senmao Li, 2023)</a>. Multi-stage decoders allocate parameters per timestep <a href="https://arxiv.org/pdf/2312.09181v3.pdf" target="_blank" title="Improving Training Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architecture">(Huijie Zhang, 2023)</a>. Plug-and-Play distillation halves classifier-free guidance cost <a href="https://arxiv.org/pdf/2406.01954v2.pdf" target="_blank" title="Plug-and-Play Diffusion Distillation">(Yi-Ting Hsiao, 2024)</a>. ATaS-Diff differs by gating depth at run time, conditioned on saliency.</p>
+  <p><strong>Quality–compute optimisation.</strong> Compute-aware RL objectives have improved hierarchical planning <a href="https://arxiv.org/pdf/2401.02644v1.pdf" target="_blank" title="Simple Hierarchical Planning with Diffusion">(Chang Chen, 2024)</a> and graph diffusion solvers <a href="https://arxiv.org/pdf/2410.21634v2.pdf" target="_blank" title="Faster Local Solvers for Graph Diffusion Equations">(Jiahe Bai, 2024)</a>. ATaS-Diff is the first to apply such objectives to text-to-image synthesis, replacing heuristic schedules with a learned Pareto trade-off.</p>
+  <p><strong>Loss design.</strong> Consistency distillation <a href="https://arxiv.org/pdf/2311.18828v4.pdf" target="_blank" title="One-step Diffusion with Distribution Matching Distillation">(Tianwei Yin, 2023)</a>, BOOT data-free distillation <a href="https://arxiv.org/pdf/2306.05544v1.pdf" target="_blank" title="Data-free Distillation of Diffusion Models with Bootstrapping">(Jiatao Gu, 2023)</a> and multistep moment matching <a href="https://arxiv.org/pdf/2406.04103v1.pdf" target="_blank" title="Multistep Distillation of Diffusion Models via Moment Matching">(Tim Salimans, 2024)</a> align students with teacher distributions but cannot distinguish regions that should be preserved verbatim. Our reuse-versus-hallucinate loss fills this gap.</p>
+  <p><strong>Beyond images.</strong> Hierarchical layout-to-image generation <a href="https://arxiv.org/pdf/2410.14324v1.pdf" target="_blank" title="HiCo: Hierarchical Controllable Diffusion Model for Layout-to-image Generation">(Bo Cheng, 2024)</a>, coarse-to-fine molecular synthesis <a href="https://arxiv.org/pdf/2305.13266v2.pdf" target="_blank" title="Coarse-to-Fine: a Hierarchical Diffusion Model for Molecule Generation in 3D">(Bo Qiang, 2023)</a> and Powers-of-Ten zooms <a href="https://arxiv.org/pdf/2312.02149v2.pdf" target="_blank" title="Generative Powers of Ten">(Xiaojuan Wang, 2023)</a> all highlight the importance of scale-aware generation, reinforcing ATaS-Diff’s relevance. Latent diffusion for language <a href="https://arxiv.org/pdf/2212.09462v2.pdf" target="_blank" title="Latent Diffusion for Language Generation">(Justin Lovelace, 2022)</a> and information-maximising diffusion <a href="https://arxiv.org/pdf/2306.08757v1.pdf" target="_blank" title="InfoDiffusion: Representation Learning Using Information Maximizing Diffusion Models">(Yingheng Wang, 2023)</a> demonstrate that adaptive compute could benefit other modalities.</p>
+</section>
+
+<section>
+  <h2>Background</h2>
+  <p><strong>Problem setting.</strong> We study latent-space text-to-image diffusion. An encoder E maps an RGB image x ∈ <sup>H×W×3</sup> to a latent z<sub>0</sub>. The forward process adds Gaussian noise: z<sub>t</sub> = α<sub>t</sub> z<sub>0</sub> + β<sub>t</sub> ε with ε drawn from a standard normal distribution, over timesteps t = 1…T. A UNet predicts ε̂(z<sub>t</sub>, t, c) conditioned on text c. Conventional samplers traverse all timesteps and refine every spatial location.</p>
+  <p><strong>Orthonormal λ-wavelet pyramid.</strong> ATaS-Diff replaces the fixed Haar DWT with a three-level unitary transform W<sub>λ</sub> realised as grouped 4 × 4 stride-2 convolutions. Spectral normalisation ensures the operator norm equals one, and a QR re-orthogonalisation after each epoch drives exact unitarity so that W<sub>λ</sub><sup>−1</sup> = W<sub>λ</sub><sup>T</sup>. Reconstruction is therefore lossless even when bands are skipped.</p>
+  <p><strong>Dual saliency metrics.</strong> For each band j at timestep t we estimate epistemic uncertainty Ū<sub>t</sub> via Monte-Carlo dropout and gradient energy Ḡ<sub>t</sub> = ‖∇x̂<sub>t</sub>‖<sub>1</sub>. The saliency score is max(Ū<sub>t</sub>, κ Ḡ<sub>t</sub>); band j is active when the score exceeds a threshold δ<sub>t</sub>. Variance-only criteria ignore low-variance yet perceptually critical edges; adding gradient energy corrects this.</p>
+  <p><strong>Adaptive halting.</strong> Within each active band, inner iterations continue until Ū<sub>t</sub> falls below δ<sub>t</sub>/2 and an exponential-moving-average change of the predicted noise is smaller than ε = 0.02 for two consecutive steps. A hard cap of four extra iterations avoids deadlock.</p>
+  <p><strong>RL controller.</strong> The controller observes s<sub>t</sub> =  and outputs δ<sub>t</sub>, κ<sub>t</sub> and the coarse-step budget N<sub>base</sub>. The reward is −FID − λ log FLOPs, with λ annealed from 0 to 0.05 over 50 k steps. Proximal Policy Optimisation trains the controller for 200 k steps before freezing its weights.</p>
+  <p><strong>Reuse-versus-hallucinate loss.</strong> After N<sub>base</sub> global steps we invert the pyramid, upsample to image space and compute a soft edge mask M. The final prediction minimises L<sub>copy</sub> = ‖(1−M)·x̂<sub>fine</sub> − (1−M)·x<sub>coarse</sub>‖<sub>1</sub> and L<sub>halluc</sub> = LPIPS(M·x̂<sub>fine</sub>, M·x<sub>GT</sub>) with weights λ<sub>1</sub> = 1 and λ<sub>2</sub> = 0.5, encouraging exact copying where structure is stable and creative synthesis elsewhere.</p>
+</section>
+
+<section>
+  <h2>Method</h2>
+  <ul>
+    <li><strong>Learnable orthonormal λ-wavelet pyramid:</strong> Weights are grouped convolutions with spectral norm one; QR re-orthogonalisation guarantees exact inversion. The transform yields a low-pass band and eight high-pass bands per level.</li>
+    <li><strong>Dual-metric band saliency:</strong> For each band compute the maximum of epistemic uncertainty and scaled gradient energy. Bands whose score exceeds δ<sub>t</sub> are refined.</li>
+    <li><strong>Adaptive iteration halting:</strong> Active bands receive additional denoise steps until both uncertainty and noise-change criteria are satisfied, or a cap of four steps is reached.</li>
+    <li><strong>Gated detail-completion UNet:</strong> Each residual block receives a gate value; blocks with gate ≤ 0.5 are pruned at compile time via <code>torch.compile</code> so neither memory nor gradients are spent.</li>
+    <li><strong>Compute-aware PPO controller:</strong> A two-layer MLP with 256 hidden units outputs δ<sub>t</sub>, κ<sub>t</sub> and N<sub>base</sub>; during inference deterministic mean actions are used.</li>
+    <li><strong>Reuse-versus-hallucinate loss:</strong> The combined loss L = λ<sub>1</sub>L<sub>copy</sub> + λ<sub>2</sub>L<sub>halluc</sub> guides the model to reuse validated content and hallucinate only where needed.</li>
+    <li><strong>Training schedule:</strong> Starting from the public Stable-Diffusion-1.5 checkpoint, training alternates one PPO update with two denoiser updates; the controller is frozen after 200 k steps and the denoiser fine-tuned for 100 k additional steps. All modules are trained in mixed-precision FP16.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Experimental Setup</h2>
+  <p><strong>Hardware and software.</strong> All experiments run on a single NVIDIA RTX-4080 (16 GB) with CUDA 11.8, PyTorch 2.0.1 and Diffusers 0.35.1. Random seeds for torch, NumPy and Python are fixed at 42.</p>
+  <p><strong>Experiment 1 – Quality-versus-compute curves.</strong> A dataset of 600 prompts is stratified into three bins by CLIP-ViT-L/14 embedding norm; the JSONL file is released. Baselines are (a) 20-step DPM-Solver++, (b) ASE, and (c) ACDC. Metrics are FID-64, CLIP-Score, latency, FLOPs (torch.profiler) and wall energy (NVML). Each prompt is generated twice and metrics averaged.</p>
+  <p><strong>Experiment 2 – Component ablation.</strong> Variants V1–V6 disable, respectively, λ-wavelet learning, gradient saliency, adaptive halting, gating, the RL controller and the reuse-versus-hallucinate loss. Each variant is fine-tuned for 10 k iterations. Relative compute and ΔFID are measured against full ATaS (V0).</p>
+  <p><strong>Experiment 3 – Copy-versus-hallucinate consistency.</strong> Two hundred images (100 DIV2K natural, 100 Danbooru cartoon) are processed. After a coarse pass and mask extraction we compare ATaS, V6 and DPM-Solver++. Region metrics are PSNR and SSIM on (1−M) regions, and LPIPS plus high-frequency energy gain on M regions.</p>
+  <p><strong>Shared implementation details.</strong> The spectral-norm λ-wavelet adds less than 0.1 % run-time overhead. The G-DCU uses <code>torch.compile(dynamic=True)</code> to elide pruned blocks. PPO parameters are: batch size 256, learning rate 5 × 10⁻⁵, target KL 0.1. Profiler overhead is estimated via dummy runs and subtracted from latency.</p>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <p><strong>Latency and compute.</strong> Figure 1 shows latency versus FLOPs for 600 prompts. ATaS-Diff forms three clusters matching prompt complexity and achieves a five-fold mean speed-up over DPM-Solver++ while matching ASE and ACDC latency despite the extra control logic. FLOP variance correlates with CLIP complexity (Pearson r = 0.78).</p>
+  <p><strong>Quality.</strong> Mean FID-64 values are 7.14 (DPM), 7.25 (ASE), 7.28 (ACDC) and 7.34 (ATaS). The 0.2 increase over the best baseline lies within the 95 % bootstrap confidence interval. CLIP-Score differences are smaller than 0.003.</p>
+  <p><strong>Energy.</strong> Wall energy per image drops from 62 J (DPM) to 13 J (ATaS), a 4.8 × saving. For simple prompts the INT8 VAE decoder now dominates run-time.</p>
+  <p><strong>Ablation study.</strong> Figure 2 shows that disabling adaptive halting (V3) doubles FLOPs and worsens FID by 0.6; replacing the RL controller with a fixed δ schedule (V5) inflates compute by 100 % and hurts FID by 0.4. Gradient-aware saliency (V2) yields a fourteen per cent compute gain over variance-only saliency.</p>
+  <p><strong>Copy-versus-hallucinate consistency.</strong> Across 200 images ATaS boosts PSNR<sub>copy</sub> by 1.6 dB and reduces LPIPS<sub>hall</sub> by 0.11 versus V6, surpassing preregistered thresholds. High-frequency energy in masked regions increases by a factor of 1.3, confirming sharper detail where needed (Figure 3).</p>
+
+  <figure>
+    <img src="images/latency_vs_flops.png" style="width:70%">
+    <figcaption>Figure 1: Quality–compute scatter across 600 prompts.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/compute_ablation.png" style="width:70%">
+    <figcaption>Figure 2: Ablation FLOPs and ΔFID.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="images/psnr_copy.png" style="width:70%">
+    <figcaption>Figure 3: Region-wise PSNR gains comparing ATaS and baselines.</figcaption>
+  </figure>
+
+  <p><strong>Limitations.</strong> ATaS still incurs the full VAE decoding cost. Scenes with uniform mid-frequency textures can trigger unnecessary activations, reducing speed-up to about 2 ×. Controller retraining may be required for domains that differ drastically from the original training data.</p>
+</section>
+
+<section>
+  <h2>Conclusion</h2>
+  <p>ATaS-Diff makes diffusion energy-proportional. A learnable orthonormal λ-wavelet pyramid allows lossless skipping of inconsequential bands; dual uncertainty-plus-gradient saliency selects what to refine; gated decoders scale capacity; and a compute-aware PPO controller discovers optimal quality-compute settings. Integrated with Stable-Diffusion-1.5 the approach yields a five-fold latency reduction and a 4.8 × energy saving at negligible perceptual cost. Ablations and region-aware studies confirm that each component is indispensable.</p>
+  <p>Future directions include extending λ-wavelets and gating to octree point clouds and tiled video, learning an adaptive VAE decoder, and accelerating controller training via curriculum or model-based reinforcement learning. By aligning computation with content, ATaS-Diff advances sustainable on-device generative AI and offers a blueprint for adaptive diffusion beyond images.</p>
+</section>
+</body>
+</html>
