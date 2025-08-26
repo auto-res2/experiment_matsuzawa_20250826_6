@@ -1,0 +1,13 @@
+# config/default.yaml
+# -------------------
+# Centralised location for hyper-parameters.  The current lightweight example
+# does not need any, but providing the file makes it easy to extend the
+# experiments without touching the Python code.
+train:
+  epochs: 3
+  batch_size: 16
+  lr: 1e-3
+
+eval:
+  real_run: false
+  device: auto

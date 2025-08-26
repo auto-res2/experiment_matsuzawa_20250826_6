@@ -1,1 +1,12 @@
-# Please list the required python packages.
+torch>=1.13
+numpy>=1.23
+pandas>=1.5
+matplotlib>=3.7
+seaborn>=0.13
+# Optional / heavy dependencies – only needed when ATAS_REAL_RUN=1
+# diffusers and transformers dramatically increase install size, therefore
+# they are not strictly required for the default (fast) execution mode.
+diffusers>=0.20  # optional
+transformers>=4.33  # optional
+piq>=0.7  # optional – perceptual IQ metrics
+nvidia-ml-py3>=7.352.0  # optional – GPU power readings
