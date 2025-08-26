@@ -1,0 +1,18 @@
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:49: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  return torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:45: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  return torch.cuda.amp.autocast(enabled=torch.cuda.is_available())
+/home/runner/work/_tool/Python/3.11.13/x64/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/home/runner/work/_tool/Python/3.11.13/x64/lib/python3.11/site-packages/torch/utils/checkpoint.py:85: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py:99: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py:112: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=torch.cuda.is_available()):
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:45: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  return torch.cuda.amp.autocast(enabled=torch.cuda.is_available())
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:45: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  return torch.cuda.amp.autocast(enabled=torch.cuda.is_available())
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:49: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  return torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())
