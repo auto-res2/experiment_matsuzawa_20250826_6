@@ -1,0 +1,4 @@
+# config/default.yaml
+# (Not used by code yet – placeholder for future hyper-parameters)
+quick: true
+learning_rate: 0.001
