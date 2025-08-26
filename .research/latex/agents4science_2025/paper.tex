@@ -1,5 +1,8 @@
 \documentclass{article}
 
+% --------------------------------------------------
+% Extra packages required to fix compilation errors
+% --------------------------------------------------
 \usepackage{agents4science_2025}
 
 \usepackage[utf8]{inputenc}
@@ -8,10 +11,13 @@
 \usepackage{url}
 \usepackage{booktabs}
 \usepackage{amsfonts}
+\usepackage{amsmath}      % for \text and \operatorname
 \usepackage{nicefrac}
 \usepackage{microtype}
 \usepackage{xcolor}
-
+\usepackage{graphicx}     % for \includegraphics
+\usepackage{float}        % for [H] float specifier
+\usepackage{enumitem}     % for customised enumerate labels
 
 \title{RevDR-VM v2: Memory-First Reversible and Sparse State-Space Backbones for Megapixel Vision}
 
@@ -24,8 +30,6 @@
 \begin{abstract}
 Pure state-space vision backbones promise linear scaling but remain capped at sub-megapixel resolutions because back-propagation through Selective Scan layers forces storage of either full hidden trajectories or per-token activations. Standard checkpointing helps little, leaving 24~GB GPUs unable to train beyond $448 \times 448$. We remove this memory wall by combining, for the first time in an SSM, three ideas previously considered incompatible with recurrence: (i) a reversible Selective State Block that reconstructs intermediate activations exactly while remaining numerically stable, (ii) a cache-free chunk scan that discards forward activations and recomputes them on demand, and (iii) Dynamic Directional Routing that learns to skip up to 30~\% of tokens without bookkeeping overhead. The resulting architecture, RevDR-VM~v2, cuts peak training memory by 60~\% and inference memory by 40~\% with only $1.6$--$1.9\times$ extra FLOPs. On ImageNet-1K we are the first SSM to train end-to-end at $1024^{2}$ on a single RTX~4090, matching SSD-VMamba within 0.2~pp and running 5~\% faster. Full-context fine-tuning on 4-k pathology and 8-k satellite imagery fits into the same GPU and lifts mIoU by 3.7~pp over crop-based baselines. A controlled ablation attributes the memory gain primarily to reversibility ($-45~\%$) and the speed gain to routing (+10~\%). We release code and Triton kernels to foster further research.
 \end{abstract}
-
-
 
 \section{Introduction}
 State-space models (SSMs) have re-emerged as strong sequence learners whose linear-time algorithms challenge the Transformer monopoly \cite{dao-2024-transformers}. VMamba translates these advances to vision by scanning tokens along four directions and already surpasses several Vision Transformer baselines on mid-resolution tasks \cite{liu-2024-vmamba}. Yet, even recent variants such as SSD-VMamba, QuadMamba and MSVMamba \cite{xie-2024-quadmamba,shi-2024-multi} stall on commodity hardware when the spatial resolution exceeds $512^{2}$. The culprit is peak-activation memory: to back-propagate through the recurrent Selective Scan layer every hidden state must be revisited, forcing frameworks to cache either the entire state sequence or all per-token activations.
@@ -80,7 +84,7 @@ The channel dimension is split into $G$ stripes. For stripe $g$ the recurrence i
     h_{g,t+1}=A_{g}h_{g,t}+B_{g}x_{g,t}, \qquad
     y_{g,t}=C_{g}h_{g,t}+x_{g,t}+\operatorname{SiLU}(\alpha_{g})\,x_{g,t},
 \]
-where $\alpha_{g}$ is a learned scalar initialised to $0.5$. Additive coupling and stripe isolation satisfy the reversibility conditions, enabling exact inversion with constant memory.
+where $\alpha_{g}$ is a learned scalar initialised to 0.5. Additive coupling and stripe isolation satisfy the reversibility conditions, enabling exact inversion with constant memory.
 
 \subsection{Cache-Free Chunk Scan}
 The token sequence is processed in chunks of length $C$. Only the final state of each chunk is stored (int8); all intermediate activations are discarded. During back-propagation every chunk is replayed to regenerate missing activations. A rule-based heuristic halves $C$ when free memory falls below 0.6~GB or doubles $C$ when free memory exceeds 6~GB, clamping $64 \leq C \leq 1024$.
@@ -139,7 +143,6 @@ All experiments share an identical Docker image (\texttt{nvidia-pytorch 23.10}).
 
 \section{Conclusion}
 RevDR-VM~v2 unites reversible coupling, cache-free chunk scanning and dynamic routing to eliminate activation storage in state-space vision models. The architecture slashes peak training memory by 60~\% and inference memory by 40~\%, enabling, for the first time, end-to-end $1024^{2}$ training on a single 24~GB GPU and full-context learning on gigapixel pathology and satellite datasets. Experiments confirm memory savings, throughput gains at high resolution and negligible accuracy loss, while ablations pinpoint reversibility as the main memory lever and routing as the main speed lever. Future work includes multi-scale reversible SSMs, quadtree routing and integration into multimodal frameworks \cite{he-2024-lmm}. We hope the released Triton kernels will catalyse broader exploration of memory-first sequence modelling.
-
 
 \bibliographystyle{plainnat}
 \bibliography{references}
