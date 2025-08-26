@@ -115,5 +115,6 @@ class Trainer:
         Path("models").mkdir(exist_ok=True)
         ckpt_path = Path("models") / "tiny_revdrvm.pt"
         torch.save(self.model.state_dict(), ckpt_path)
-        print(f"Model saved → {ckpt_path.relative_to(Path.cwd())}")
+        # Use a simple string to avoid relative path issues
+        print(f"Model saved → {ckpt_path}")
         return history

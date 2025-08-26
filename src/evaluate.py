@@ -4,7 +4,7 @@ evaluate.py
 Evaluation helpers for the RevDR-VM toy experiments.  The main entry‐point
 ``evaluate`` loads the trained model checkpoint (if provided) and reports final
 accuracy on the validation set plus a diagnostic confusion-matrix figure
-exported as PDF under ``.research/iteration1/images``.
+exported as PDF under ``.research/iteration2/images``.
 """
 from __future__ import annotations
 
@@ -34,7 +34,8 @@ def _confmat_fig(cm, class_names, fname):
     Path(fname).parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(fname, bbox_inches="tight")
     plt.close()
-    print(f"Confusion-matrix PDF saved → {fname.relative_to(Path.cwd())}")
+    # Avoid potential Path.relative_to issues by printing the path directly.
+    print(f"Confusion-matrix PDF saved → {fname}")
 
 # -----------------------------------------------------------------------------
 
@@ -61,7 +62,7 @@ def evaluate(loader: torch.utils.data.DataLoader,
     cm = confusion_matrix(gts, preds)
 
     # ---------- figure ----------
-    img_dir = Path(".research/iteration1/images")
+    img_dir = Path(".research/iteration2/images")
     _confmat_fig(cm, list(range(cm.shape[0])), img_dir / "confusion_matrix.pdf")
 
     print(f"VAL accuracy: {acc * 100:.2f} %  (n={len(gts)})")
