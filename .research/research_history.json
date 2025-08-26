@@ -521,6 +521,68 @@
       }
     }
   ],
+  "reference_research_study_list": [
+    {
+      "title": "Ss-il: Separated softmax for incremental learning"
+    },
+    {
+      "title": "Memory aware synapses: Learning what (not) to forget"
+    },
+    {
+      "title": "Gradient based sample selection for online continual learning"
+    },
+    {
+      "title": "Deep rewiring: Training very sparse deep networks"
+    },
+    {
+      "title": "Measuring and regularizing networks in function space"
+    },
+    {
+      "title": "Coresets via bilevel optimization for continual learning and streaming"
+    },
+    {
+      "title": "The malicious use of artificial intelligence: Forecasting, prevention, and mitigation"
+    },
+    {
+      "title": "Dark experience for general continual learning: a strong, simple baseline"
+    },
+    {
+      "title": "An analysis of deep neural network models for practical applications"
+    },
+    {
+      "title": "Co2l: Contrastive continual learning"
+    },
+    {
+      "title": "Using hindsight to anchor past knowledge in continual learning"
+    },
+    {
+      "title": "Efficient lifelong learning with a-gem"
+    },
+    {
+      "title": "On tiny episodic memories in continual learning"
+    },
+    {
+      "title": "Long live the lottery: The existence of winning tickets in lifelong learning"
+    },
+    {
+      "title": "Imagenet: A large-scale hierarchical image database"
+    },
+    {
+      "title": "Sparse networks from scratch: Faster training without losing performance"
+    },
+    {
+      "title": "Rtmobile: Beyond real-time mobile acceleration of rnns for speech recognition"
+    },
+    {
+      "title": "Network pruning via transformable architecture search"
+    },
+    {
+      "title": "Rigging the lottery: Making all tickets winners"
+    },
+    {
+      "title": "The lottery ticket hypothesis: Finding sparse, trainable neural networks"
+    }
+  ],
   "new_method": {
     "method": "Motivation\nEdge MCUs and federated IoT clients have <256 kB flash and <512 kB RAM, yet existing continual-learning methods still allocate thousands of parameters + replay codes per task. HyperCodec-CL++ proposes to collapse BOTH resources into one 32-bit task token, but the original sketch leaves several open issues: (1) How to guarantee that the single code is simultaneously good for weight generation AND data replay? (2) How to stabilise straight-through optimisation of 4-byte latents on noisy low-power hardware? (3) How to update the shared codebooks across many heterogeneous devices without violating privacy or blowing the flash budget?\n\nMethodology\n1. Dual-Objective Latent Distillation\n   • Reformulate pre-training loss as a three-way information bottleneck: maximise MI(z;ΔW) and MI(z;f⁻¹(x)) while minimising MI(z;ε) where ε is stochastic encoder noise.  A variational upper bound converts this into differentiable KL terms, forcing every latent index to encode both adaptation gradients and salient input statistics.\n\n2. Progressive Codebook Freezing\n   • Split each VQ codebook into a mutable “young” half and a frozen “mature” half.  During factory pre-training all entries are trainable; after shipping, devices only refine the young part with sparse EMA updates β_t≤0.05 that are pushed over-the-air and merged by a lightweight federated averaging protocol.  The mature half guarantees backward compatibility so that old indices are never invalidated.\n\n3. Noise-Shaped Straight-Through Estimator (NS-STE)\n   • Replace vanilla STE with a hardware-aware version that injects quantisation noise proportional to the MCU’s ADC thermal profile (measured once on-device).  This desensitises latent optimisation to fixed-point arithmetic errors and yields 0.5–1 % ACC gains in preliminary Cortex-M4 sims.\n\n4. Privacy-Preserving Federated Merge\n   • Clients transmit only Bloom-filter-masked counts of latent usage plus the 32-bit codes; server reconstructs a coreset of at most 4·√T representative codes and broadcasts a remap table.  Differential privacy (ε=1.0, δ=1e-5) is achieved via count-min sketch noise calibrated to code frequency.\n\n5. Ultra-Tiny Runtime\n   • Replace grouped-LoRA with “Bit-Tilted” adapters: H_θ outputs two 64-byte sign/scale tensors that modulate backbone activations via x⋅sign⨀2^{-scale}.  This removes all FP multiplications except in the backbone and reduces RAM to 400 B per task during inference.\n\n6. Evaluation Extensions\n   • Add TinyAG-Speech and HAR-WISDM to verify modality-agnostic replay.\n   • Measure robustness: FGSM on synthetic replays vs. raw-buffer baselines.\n   • Energy profiling with ARM CMSIS Power-Optimizer to report µJ per task ingested.\n\nDifferences vs. Prior Work\n– First to unify adapter generation + synthetic replay in ONE 32-bit index.\n– Introduces dual-objective MI training guaranteeing joint usefulness of codes (not present in AQM/OCC or InfLoRA).\n– Progressive codebook freezing enables backward-compatible updates, unlike VQ-VAEs that drift.\n– NS-STE explicitly models fixed-point hardware noise—a dimension ignored by prior continual-learning literature.\n– Bit-Tilted adapters cut runtime RAM by 15× over 4-bit LoRA used in SAFE/InfLoRA.\n\nExpected Impact\n• Reduces per-task non-volatile footprint from ~4 kB (InfLoRA+Replay) to ≤4 B while maintaining <2 % accuracy loss on VWW and KWS.\n• Enables on-device lifelong learning for solar-harvested sensors (average power <50 µW).\n• Provides a privacy-by-design federated protocol requiring no gradient or feature sharing.\n• Establishes a new benchmark for “single-token continual learning”, catalysing cross-pollination between compression and CL communities and informing future TinyML standards.\n",
     "experimental_design": {
