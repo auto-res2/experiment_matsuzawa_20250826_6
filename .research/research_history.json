@@ -6,5 +6,82 @@
     "continual learning compression",
     "efficient replay continual learning",
     "memory footprint lifelong learning"
+  ],
+  "research_study_list": [
+    {
+      "title": "Continual Learning in Low-rank Orthogonal Subspaces"
+    },
+    {
+      "title": "Contextual Transformation Networks for Online Continual Learning"
+    },
+    {
+      "title": "SparCL: Sparse Continual Learning on the Edge"
+    },
+    {
+      "title": "MECTA: Memory-Economic Continual Test-Time Model Adaptation"
+    },
+    {
+      "title": "Improving Task-free Continual Learning by Distributionally Robust Memory Evolution"
+    },
+    {
+      "title": "Long Live the Lottery: The Existence of Winning Tickets in Lifelong Learning"
+    },
+    {
+      "title": "InfLoRA: Interference-Free Low-Rank Adaptation for Continual Learning"
+    },
+    {
+      "title": "Task Difficulty Aware Parameter Allocation & Regularization for Lifelong Learning"
+    },
+    {
+      "title": "Calibrating CNNs for Lifelong Learning"
+    },
+    {
+      "title": "SAFE: Slow and Fast Parameter-Efficient Tuning for Continual Learning with Pre-Trained Models"
+    },
+    {
+      "title": "Online Learned Continual Compression with Adaptive Quantization Modules"
+    },
+    {
+      "title": "Towards Backward-Compatible Continual Learning of Image Compression"
+    },
+    {
+      "title": "Forget-free Continual Learning with Winning Subnetworks"
+    },
+    {
+      "title": "Forget-free Continual Learning with Winning Subnetworks"
+    },
+    {
+      "title": "SparCL: Sparse Continual Learning on the Edge"
+    },
+    {
+      "title": "Layerwise Proximal Replay: A Proximal Point Method for Online Continual Learning"
+    },
+    {
+      "title": "Regularizing Second-Order Influences for Continual Learning"
+    },
+    {
+      "title": "Online Bias Correction for Task-Free Continual Learning"
+    },
+    {
+      "title": "Graph-Based Continual Learning"
+    },
+    {
+      "title": "PCR: Proxy-Based Contrastive Replay for Online Class-Incremental Continual Learning"
+    },
+    {
+      "title": "Long Live the Lottery: The Existence of Winning Tickets in Lifelong Learning"
+    },
+    {
+      "title": "GAN Memory with No Forgetting"
+    },
+    {
+      "title": "Continual Deep Learning by Functional Regularisation of Memorable Past"
+    },
+    {
+      "title": "Continual Deep Learning by Functional Regularisation of Memorable Past"
+    },
+    {
+      "title": "An Empirical Investigation of the Role of Pre-training in Lifelong Learning"
+    }
   ]
 }
