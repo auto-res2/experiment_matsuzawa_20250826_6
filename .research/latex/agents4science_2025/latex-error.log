@@ -1,0 +1,1591 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./agents4science_2025.sty
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/units/nicefrac.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+No file paper.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ptm.cfg)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+! Undefined control sequence.
+l.31 ...that quickly exhaust the \(\leq 256\,\text
+                                                  {kB}\) of flash available ...
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 ...ions and cutting runtime RAM by 15\,\times
+                                                   relative to 4-bit LoRA.
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item
+             \textbf{Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 \end{itemize}
+                  
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+[]\T1/ptm/b/n/10 (+20) Bit-Tilted Adapters \T1/ptm/m/n/10 (+20) mod-u-late ac-t
+i-va-tions with two 64-element sign-and-scale ten-
+
+Underfull \hbox (badness 3128) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) sors, elim-i-nat-ing all ad-di-tional floating-point mul-t
+i-pli-ca-tions and cut-ting run-time RAM
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) by 15$\OMS/cmsy/m/n/10 ^^B\OML/cmm/m/it/10 relativeto\OT1/
+cmr/m/n/10 4 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 bitLoRA:[]exportstoCMSIS \OM
+S/cmsy/m/n/10 ^^@
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\OML/cmm/m/it/10 NN; includesenergyprofilinghooks; anddemonstrates\OT1/cmr/m/n/
+10 ^^V\OML/cmm/m/it/10 forthefirsttime\OT1/cmr/m/n/10 ^^V\OML/cmm/m/it/10 end \
+OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 to \OMS/cmsy/m/n/10 ^^@
+! Undefined control sequence.
+l.63 An edge device with \(\leq 256\,\text
+                                          {kB}\) flash and \(\leq 512\,\text...
+
+! Undefined control sequence.
+l.63 ...6\,\text{kB}\) flash and \(\leq 512\,\text
+                                                  {kB}\) SRAM receives a str...
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active [2]
+! Undefined control sequence.
+l.66 Let \(f_{\boldsymbol
+                         {\theta}}\) denote a pre-trained network whose weig...
+
+! Undefined control sequence.
+l.66 ...rained network whose weights \(\boldsymbol
+                                                  {\theta}\) remain fixed af...
+
+! Undefined control sequence.
+l.66 ...enerates a continuous latent \(\boldsymbol
+                                                  {q}\in\mathbb{R}^{128}\), ...
+
+! Undefined control sequence.
+l.66 ...struct synthetic replay \(\hat{\boldsymbol
+                                                  {x}} = g(z,\varepsilon)\) ...
+
+! Undefined control sequence.
+l.66 ... low-rank adapter parameters \(\boldsymbol
+                                                  {\alpha} = h(z)\); predict...
+
+! Undefined control sequence.
+l.66 ...redictions follow \(\hat{y}=f_{\boldsymbol
+                                                  {\theta},\boldsymbol{\alph...
+
+! Undefined control sequence.
+l.66 ...\hat{y}=f_{\boldsymbol{\theta},\boldsymbol
+                                                  {\alpha}}(\boldsymbol{x})\).
+! Undefined control sequence.
+l.66 ...l{\theta},\boldsymbol{\alpha}}(\boldsymbol
+                                                  {x})\).
+! Undefined control sequence.
+l.75 ...ue-digital converter noise \(\sigma_{\text
+                                                  {hw}}\) once and stores it...
+
+! Undefined control sequence.
+l.75 ...njects \(\eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\) before roundi...
+
+! Undefined control sequence.
+l.79 ...he backbone frozen, a batch \((\boldsymbol
+                                                  {x},\boldsymbol{y})\) is e...
+
+! Undefined control sequence.
+l.79 ...zen, a batch \((\boldsymbol{x},\boldsymbol
+                                                  {y})\) is encoded into a c...
+
+! Undefined control sequence.
+l.79 ...ded into a continuous latent \(\boldsymbol
+                                                  {q}\). A one-step gradient...
+
+! Undefined control sequence.
+l.79 ...nt \(\Delta W\) is computed, \(\boldsymbol
+                                                  {q}\) is vector-quantised ...
+
+! Undefined control sequence.
+l.81 \mathcal{L}=\mathcal{L}_{\text
+                                   {cls}} + \lambda_w\,\hat{\mathrm{I}}(z;\D...
+
+! Undefined control sequence.
+l.81 ...a_x\,\hat{\mathrm{I}}(z;f^{-1}(\boldsymbol
+                                                  {x})) - \lambda_n\,\hat{\m...
+
+! Undefined control sequence.
+l.83 Variational posteriors \(q_{\boldsymbol
+                                            {\psi}}\) and \(q_{\boldsymbol{\...
+
+! Undefined control sequence.
+l.83 ...{\boldsymbol{\psi}}\) and \(q_{\boldsymbol
+                                                  {\xi}}\) provide the infor...
+
+! Undefined control sequence.
+l.88 ...beta)\,\mathbf{C}_{i_y}+\beta\,\boldsymbol
+                                                  {q},\qquad \beta \sim \mat...
+
+! Undefined control sequence.
+l.92 Quantisation employs \(\hat{\boldsymbol
+                                            {q}} = \operatorname{round}(\bol...
+
+! Undefined control sequence.
+l.92 ...oys \(\hat{\boldsymbol{q}} = \operatorname
+                                                  {round}(\boldsymbol{q}) + ...
+
+! Undefined control sequence.
+l.92 ...bol{q}} = \operatorname{round}(\boldsymbol
+                                                  {q}) + \eta\,\mathcal{N}(0...
+
+! Undefined control sequence.
+l.92 ...ol{q}) + \eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\). Simulating C...
+
+! Undefined control sequence.
+l.95 The projection \(H_{\boldsymbol
+                                    {\theta}}\) maps \(z\) to 128 values, wh...
+
+! Undefined control sequence.
+l.95 ...ctivations are modulated via \(\boldsymbol
+                                                  {x} \leftarrow \boldsymbol...
+
+! Undefined control sequence.
+l.95 ...ia \(\boldsymbol{x} \leftarrow \boldsymbol
+                                                  {x}\,\text{sign} \odot 2^{...
+
+! Undefined control sequence.
+l.95 ...symbol{x} \leftarrow \boldsymbol{x}\,\text
+                                                  {sign} \odot 2^{-\text{sca...
+
+! Undefined control sequence.
+l.95 ...boldsymbol{x}\,\text{sign} \odot 2^{-\text
+                                                  {scale}}\). All values are...
+
+[3]
+! Undefined control sequence.
+l.98 ...s, adds Gaussian DP noise (\(\sigma_{\text
+                                                  {dp}}\) chosen for \(\vare...
+
+! Undefined control sequence.
+l.116 ... RAM (CubeIDE) and energy per sample (\si
+                                                  {\micro\joule})
+! Undefined control sequence.
+l.116 ...ubeIDE) and energy per sample (\si{\micro
+                                                  \joule})
+! Undefined control sequence.
+l.116 ...) and energy per sample (\si{\micro\joule
+                                                  })
+! Undefined control sequence.
+l.124 ... bits with $k=5$, DP noise $\sigma_{\text
+                                                  {dp}}\approx1.2$, young/ma...
+
+[4]
+! Undefined control sequence.
+l.127 \newcolumntype
+                    {Y}{>{\raggedright\arraybackslash}X}
+! Undefined control sequence.
+l.127 ...lumntype{Y}{>{\raggedright\arraybackslash
+                                                  }X}
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \begin{table}[H]
+                      
+
+! LaTeX Error: Environment tabularx undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.136 \begin{tabularx}
+                      {\textwidth}{cYYY}
+! Missing number, treated as zero.
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.137 \hline
+            
+! Misplaced alignment tab character &.
+l.138 Task &
+             SVHN & CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN &
+                    CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 &
+                               CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 & CIFAR-20 &
+                                          Tiny-IN-20\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.139 \hline
+            
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) &
+                   10.16 & 10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 &
+                           10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 &
+                                   10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 & 10.42 &
+                                           8.98\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.141 \hline
+            
+
+! LaTeX Error: \begin{table} on input line 134 ended by \end{tabularx}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 \end{tabularx}
+                    
+! Undefined control sequence.
+l.150 ...ence samples at 80\,MHz consumed 2.3\,\si
+                                                  {\micro\joule} per sample;...
+
+! Undefined control sequence.
+l.150 ...mples at 80\,MHz consumed 2.3\,\si{\micro
+                                                  \joule} per sample; the fi...
+
+! Undefined control sequence.
+l.150 ...at 80\,MHz consumed 2.3\,\si{\micro\joule
+                                                  } per sample; the first 10...
+
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 \begin{figure}[H]
+                       
+! Undefined control sequence.
+l.154     \includegraphics
+                          [width=0.7\linewidth]{ images/accuracy.pdf }
+! Missing number, treated as zero.
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+No file paper.bbl.
+[5] [6] (./paper.aux)
+kpathsea: Running mktexpk --mfmode / --bdpi 600 --mag 1+0/600 --dpi 600 ectt1000
+mktexpk: Running mf-nowin -progname=mf \mode:=ljfour; mag:=1+0/600; nonstopmode; input ectt1000
+This is METAFONT, Version 2.71828182 (TeX Live 2023/Debian) (preloaded base=mf)
+
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/ectt1000.mf
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exbase.mf)
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/ectt.mf
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exroman.mf
+ Ok (/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exaccess.mf
+ Ok) (/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/expseudo.mf
+ Ok) (/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exruwest.mf
+ Ok [192] [193] [194] [195] [196] [197] [198] [199] [200] [201] [202] [203]
+[204] [205] [206] [207] [208] [209] [210] [211] [212] [213] [214] [215]
+[216] [217] [218] [219] [220] [221] [222] [223])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrlwest.mf
+ Ok [224] [225] [226] [227] [228] [229] [230] [231] [232] [233] [234] [235]
+[236] [237] [238] [239] [240] [241] [242] [243] [244] [245] [246] [247]
+[248] [249] [250] [251] [252] [253] [254] [255])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrueast.mf
+ Ok [128] [129] [130] [131] [132] [133] [134] [135] [136] [137] [138] [139]
+[140] [141] [142] [143] [144] [145] [146] [147] [148] [149] [150] [151]
+[152] [153] [154] [155] [156] [157])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrleast.mf
+ Ok [158] [160] [161] [162] [163] [164] [165] [166] [167] [168] [169] [170]
+[171] [172] [173] [174] [175] [176] [177] [178] [179] [180] [181] [182]
+[183] [184] [185] [186] [187] [188])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exbraces.mf
+ Ok [94] [126] [23] [40] [41] [60] [124] [62] [91] [93] [92] [123] [125]
+[95] [127] [32])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/expunct.mf
+ Ok [14] [15] [19] [20] [13] [18] [33] [39] [42] [43] [44] [46] [47] [58]
+[59] [61] [96] [189] [17] [45] [16] [21] [22])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exaccent.mf
+ Ok [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exsign.mf
+ Ok [24] [34] [35] [36] [37] [64] [191] [159])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrlig.mf
+ Ok [25] [26] [28] [27] [29] [30] [31])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exromp.mf
+ Ok [38] [63] [190])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrulett.mf
+ Ok [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76] [77] [78]
+[79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrllett.mf
+ Ok [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107] [108]
+[109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120]
+[121] [122])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exrdigit.mf
+ Ok [48] [49] [50] [51] [52] [53] [54] [55] [56] [57])
+(/usr/share/texlive/texmf-dist/fonts/source/jknappen/ec/exmligtb.mf
+ Ok) ) ) )
+Font metrics written on ectt1000.tfm.
+Output written on ectt1000.600gf (256 characters, 43832 bytes).
+Transcript written on ectt1000.log.
+mktexpk: /home/runner/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk: successfully generated.
+
+
+Package rerunfilecheck Warning: File `paper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information) </home/runner/.texlive2023
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb>
+Output written on paper.pdf (6 pages, 160485 bytes).
+Transcript written on paper.log.
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+The top-level auxiliary file: paper.aux
+The style file: plainnat.bst
+I found no \citation commands---while reading file paper.aux
+Database file #1: references.bib
+(There was 1 error message)
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./agents4science_2025.sty
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/units/nicefrac.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./paper.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(./paper.out) (./paper.out)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ptm.cfg)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+! Undefined control sequence.
+l.31 ...that quickly exhaust the \(\leq 256\,\text
+                                                  {kB}\) of flash available ...
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 ...ions and cutting runtime RAM by 15\,\times
+                                                   relative to 4-bit LoRA.
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item
+             \textbf{Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 \end{itemize}
+                  
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+[]\T1/ptm/b/n/10 (+20) Bit-Tilted Adapters \T1/ptm/m/n/10 (+20) mod-u-late ac-t
+i-va-tions with two 64-element sign-and-scale ten-
+
+Underfull \hbox (badness 3128) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) sors, elim-i-nat-ing all ad-di-tional floating-point mul-t
+i-pli-ca-tions and cut-ting run-time RAM
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) by 15$\OMS/cmsy/m/n/10 ^^B\OML/cmm/m/it/10 relativeto\OT1/
+cmr/m/n/10 4 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 bitLoRA:[]exportstoCMSIS \OM
+S/cmsy/m/n/10 ^^@
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\OML/cmm/m/it/10 NN; includesenergyprofilinghooks; anddemonstrates\OT1/cmr/m/n/
+10 ^^V\OML/cmm/m/it/10 forthefirsttime\OT1/cmr/m/n/10 ^^V\OML/cmm/m/it/10 end \
+OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 to \OMS/cmsy/m/n/10 ^^@
+! Undefined control sequence.
+l.63 An edge device with \(\leq 256\,\text
+                                          {kB}\) flash and \(\leq 512\,\text...
+
+! Undefined control sequence.
+l.63 ...6\,\text{kB}\) flash and \(\leq 512\,\text
+                                                  {kB}\) SRAM receives a str...
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active [2]
+! Undefined control sequence.
+l.66 Let \(f_{\boldsymbol
+                         {\theta}}\) denote a pre-trained network whose weig...
+
+! Undefined control sequence.
+l.66 ...rained network whose weights \(\boldsymbol
+                                                  {\theta}\) remain fixed af...
+
+! Undefined control sequence.
+l.66 ...enerates a continuous latent \(\boldsymbol
+                                                  {q}\in\mathbb{R}^{128}\), ...
+
+! Undefined control sequence.
+l.66 ...struct synthetic replay \(\hat{\boldsymbol
+                                                  {x}} = g(z,\varepsilon)\) ...
+
+! Undefined control sequence.
+l.66 ... low-rank adapter parameters \(\boldsymbol
+                                                  {\alpha} = h(z)\); predict...
+
+! Undefined control sequence.
+l.66 ...redictions follow \(\hat{y}=f_{\boldsymbol
+                                                  {\theta},\boldsymbol{\alph...
+
+! Undefined control sequence.
+l.66 ...\hat{y}=f_{\boldsymbol{\theta},\boldsymbol
+                                                  {\alpha}}(\boldsymbol{x})\).
+! Undefined control sequence.
+l.66 ...l{\theta},\boldsymbol{\alpha}}(\boldsymbol
+                                                  {x})\).
+! Undefined control sequence.
+l.75 ...ue-digital converter noise \(\sigma_{\text
+                                                  {hw}}\) once and stores it...
+
+! Undefined control sequence.
+l.75 ...njects \(\eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\) before roundi...
+
+! Undefined control sequence.
+l.79 ...he backbone frozen, a batch \((\boldsymbol
+                                                  {x},\boldsymbol{y})\) is e...
+
+! Undefined control sequence.
+l.79 ...zen, a batch \((\boldsymbol{x},\boldsymbol
+                                                  {y})\) is encoded into a c...
+
+! Undefined control sequence.
+l.79 ...ded into a continuous latent \(\boldsymbol
+                                                  {q}\). A one-step gradient...
+
+! Undefined control sequence.
+l.79 ...nt \(\Delta W\) is computed, \(\boldsymbol
+                                                  {q}\) is vector-quantised ...
+
+! Undefined control sequence.
+l.81 \mathcal{L}=\mathcal{L}_{\text
+                                   {cls}} + \lambda_w\,\hat{\mathrm{I}}(z;\D...
+
+! Undefined control sequence.
+l.81 ...a_x\,\hat{\mathrm{I}}(z;f^{-1}(\boldsymbol
+                                                  {x})) - \lambda_n\,\hat{\m...
+
+! Undefined control sequence.
+l.83 Variational posteriors \(q_{\boldsymbol
+                                            {\psi}}\) and \(q_{\boldsymbol{\...
+
+! Undefined control sequence.
+l.83 ...{\boldsymbol{\psi}}\) and \(q_{\boldsymbol
+                                                  {\xi}}\) provide the infor...
+
+! Undefined control sequence.
+l.88 ...beta)\,\mathbf{C}_{i_y}+\beta\,\boldsymbol
+                                                  {q},\qquad \beta \sim \mat...
+
+! Undefined control sequence.
+l.92 Quantisation employs \(\hat{\boldsymbol
+                                            {q}} = \operatorname{round}(\bol...
+
+! Undefined control sequence.
+l.92 ...oys \(\hat{\boldsymbol{q}} = \operatorname
+                                                  {round}(\boldsymbol{q}) + ...
+
+! Undefined control sequence.
+l.92 ...bol{q}} = \operatorname{round}(\boldsymbol
+                                                  {q}) + \eta\,\mathcal{N}(0...
+
+! Undefined control sequence.
+l.92 ...ol{q}) + \eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\). Simulating C...
+
+! Undefined control sequence.
+l.95 The projection \(H_{\boldsymbol
+                                    {\theta}}\) maps \(z\) to 128 values, wh...
+
+! Undefined control sequence.
+l.95 ...ctivations are modulated via \(\boldsymbol
+                                                  {x} \leftarrow \boldsymbol...
+
+! Undefined control sequence.
+l.95 ...ia \(\boldsymbol{x} \leftarrow \boldsymbol
+                                                  {x}\,\text{sign} \odot 2^{...
+
+! Undefined control sequence.
+l.95 ...symbol{x} \leftarrow \boldsymbol{x}\,\text
+                                                  {sign} \odot 2^{-\text{sca...
+
+! Undefined control sequence.
+l.95 ...boldsymbol{x}\,\text{sign} \odot 2^{-\text
+                                                  {scale}}\). All values are...
+
+[3]
+! Undefined control sequence.
+l.98 ...s, adds Gaussian DP noise (\(\sigma_{\text
+                                                  {dp}}\) chosen for \(\vare...
+
+! Undefined control sequence.
+l.116 ... RAM (CubeIDE) and energy per sample (\si
+                                                  {\micro\joule})
+! Undefined control sequence.
+l.116 ...ubeIDE) and energy per sample (\si{\micro
+                                                  \joule})
+! Undefined control sequence.
+l.116 ...) and energy per sample (\si{\micro\joule
+                                                  })
+! Undefined control sequence.
+l.124 ... bits with $k=5$, DP noise $\sigma_{\text
+                                                  {dp}}\approx1.2$, young/ma...
+
+[4]
+! Undefined control sequence.
+l.127 \newcolumntype
+                    {Y}{>{\raggedright\arraybackslash}X}
+! Undefined control sequence.
+l.127 ...lumntype{Y}{>{\raggedright\arraybackslash
+                                                  }X}
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \begin{table}[H]
+                      
+
+! LaTeX Error: Environment tabularx undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.136 \begin{tabularx}
+                      {\textwidth}{cYYY}
+! Missing number, treated as zero.
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.137 \hline
+            
+! Misplaced alignment tab character &.
+l.138 Task &
+             SVHN & CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN &
+                    CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 &
+                               CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 & CIFAR-20 &
+                                          Tiny-IN-20\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.139 \hline
+            
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) &
+                   10.16 & 10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 &
+                           10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 &
+                                   10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 & 10.42 &
+                                           8.98\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.141 \hline
+            
+
+! LaTeX Error: \begin{table} on input line 134 ended by \end{tabularx}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 \end{tabularx}
+                    
+! Undefined control sequence.
+l.150 ...ence samples at 80\,MHz consumed 2.3\,\si
+                                                  {\micro\joule} per sample;...
+
+! Undefined control sequence.
+l.150 ...mples at 80\,MHz consumed 2.3\,\si{\micro
+                                                  \joule} per sample; the fi...
+
+! Undefined control sequence.
+l.150 ...at 80\,MHz consumed 2.3\,\si{\micro\joule
+                                                  } per sample; the first 10...
+
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 \begin{figure}[H]
+                       
+! Undefined control sequence.
+l.154     \includegraphics
+                          [width=0.7\linewidth]{ images/accuracy.pdf }
+! Missing number, treated as zero.
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+(./paper.bbl [5]
+
+Package natbib Warning: Empty `thebibliography' environment on input line 8.
+
+) [6] [7] (./paper.aux) )
+(see the transcript file for additional information) </home/runner/.texlive2023
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb>
+Output written on paper.pdf (7 pages, 162682 bytes).
+Transcript written on paper.log.
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./paper.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo))
+(./agents4science_2025.sty
+(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty)
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/units/nicefrac.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.cfg))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(./paper.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(./paper.out) (./paper.out)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-ptm.cfg)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd)
+! Undefined control sequence.
+l.31 ...that quickly exhaust the \(\leq 256\,\text
+                                                  {kB}\) of flash available ...
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.44 ...ions and cutting runtime RAM by 15\,\times
+                                                   relative to 4-bit LoRA.
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item
+             \textbf{Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45   \item \textbf
+                    {Open-Source Implementation} exports to CMSIS-NN, includ...
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+LaTeX Warning: Command \textemdash invalid in math mode on input line 45.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \end{itemize}
+                  
+! Missing $ inserted.
+<inserted text> 
+                $
+l.46 \end{itemize}
+                  
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+[]\T1/ptm/b/n/10 (+20) Bit-Tilted Adapters \T1/ptm/m/n/10 (+20) mod-u-late ac-t
+i-va-tions with two 64-element sign-and-scale ten-
+
+Underfull \hbox (badness 3128) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) sors, elim-i-nat-ing all ad-di-tional floating-point mul-t
+i-pli-ca-tions and cut-ting run-time RAM
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\T1/ptm/m/n/10 (+20) by 15$\OMS/cmsy/m/n/10 ^^B\OML/cmm/m/it/10 relativeto\OT1/
+cmr/m/n/10 4 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 bitLoRA:[]exportstoCMSIS \OM
+S/cmsy/m/n/10 ^^@
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\OML/cmm/m/it/10 NN; includesenergyprofilinghooks; anddemonstrates\OT1/cmr/m/n/
+10 ^^V\OML/cmm/m/it/10 forthefirsttime\OT1/cmr/m/n/10 ^^V\OML/cmm/m/it/10 end \
+OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 to \OMS/cmsy/m/n/10 ^^@
+! Undefined control sequence.
+l.63 An edge device with \(\leq 256\,\text
+                                          {kB}\) flash and \(\leq 512\,\text...
+
+! Undefined control sequence.
+l.63 ...6\,\text{kB}\) flash and \(\leq 512\,\text
+                                                  {kB}\) SRAM receives a str...
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active [2]
+! Undefined control sequence.
+l.66 Let \(f_{\boldsymbol
+                         {\theta}}\) denote a pre-trained network whose weig...
+
+! Undefined control sequence.
+l.66 ...rained network whose weights \(\boldsymbol
+                                                  {\theta}\) remain fixed af...
+
+! Undefined control sequence.
+l.66 ...enerates a continuous latent \(\boldsymbol
+                                                  {q}\in\mathbb{R}^{128}\), ...
+
+! Undefined control sequence.
+l.66 ...struct synthetic replay \(\hat{\boldsymbol
+                                                  {x}} = g(z,\varepsilon)\) ...
+
+! Undefined control sequence.
+l.66 ... low-rank adapter parameters \(\boldsymbol
+                                                  {\alpha} = h(z)\); predict...
+
+! Undefined control sequence.
+l.66 ...redictions follow \(\hat{y}=f_{\boldsymbol
+                                                  {\theta},\boldsymbol{\alph...
+
+! Undefined control sequence.
+l.66 ...\hat{y}=f_{\boldsymbol{\theta},\boldsymbol
+                                                  {\alpha}}(\boldsymbol{x})\).
+! Undefined control sequence.
+l.66 ...l{\theta},\boldsymbol{\alpha}}(\boldsymbol
+                                                  {x})\).
+! Undefined control sequence.
+l.75 ...ue-digital converter noise \(\sigma_{\text
+                                                  {hw}}\) once and stores it...
+
+! Undefined control sequence.
+l.75 ...njects \(\eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\) before roundi...
+
+! Undefined control sequence.
+l.79 ...he backbone frozen, a batch \((\boldsymbol
+                                                  {x},\boldsymbol{y})\) is e...
+
+! Undefined control sequence.
+l.79 ...zen, a batch \((\boldsymbol{x},\boldsymbol
+                                                  {y})\) is encoded into a c...
+
+! Undefined control sequence.
+l.79 ...ded into a continuous latent \(\boldsymbol
+                                                  {q}\). A one-step gradient...
+
+! Undefined control sequence.
+l.79 ...nt \(\Delta W\) is computed, \(\boldsymbol
+                                                  {q}\) is vector-quantised ...
+
+! Undefined control sequence.
+l.81 \mathcal{L}=\mathcal{L}_{\text
+                                   {cls}} + \lambda_w\,\hat{\mathrm{I}}(z;\D...
+
+! Undefined control sequence.
+l.81 ...a_x\,\hat{\mathrm{I}}(z;f^{-1}(\boldsymbol
+                                                  {x})) - \lambda_n\,\hat{\m...
+
+! Undefined control sequence.
+l.83 Variational posteriors \(q_{\boldsymbol
+                                            {\psi}}\) and \(q_{\boldsymbol{\...
+
+! Undefined control sequence.
+l.83 ...{\boldsymbol{\psi}}\) and \(q_{\boldsymbol
+                                                  {\xi}}\) provide the infor...
+
+! Undefined control sequence.
+l.88 ...beta)\,\mathbf{C}_{i_y}+\beta\,\boldsymbol
+                                                  {q},\qquad \beta \sim \mat...
+
+! Undefined control sequence.
+l.92 Quantisation employs \(\hat{\boldsymbol
+                                            {q}} = \operatorname{round}(\bol...
+
+! Undefined control sequence.
+l.92 ...oys \(\hat{\boldsymbol{q}} = \operatorname
+                                                  {round}(\boldsymbol{q}) + ...
+
+! Undefined control sequence.
+l.92 ...bol{q}} = \operatorname{round}(\boldsymbol
+                                                  {q}) + \eta\,\mathcal{N}(0...
+
+! Undefined control sequence.
+l.92 ...ol{q}) + \eta\,\mathcal{N}(0,\sigma_{\text
+                                                  {hw}}^{2})\). Simulating C...
+
+! Undefined control sequence.
+l.95 The projection \(H_{\boldsymbol
+                                    {\theta}}\) maps \(z\) to 128 values, wh...
+
+! Undefined control sequence.
+l.95 ...ctivations are modulated via \(\boldsymbol
+                                                  {x} \leftarrow \boldsymbol...
+
+! Undefined control sequence.
+l.95 ...ia \(\boldsymbol{x} \leftarrow \boldsymbol
+                                                  {x}\,\text{sign} \odot 2^{...
+
+! Undefined control sequence.
+l.95 ...symbol{x} \leftarrow \boldsymbol{x}\,\text
+                                                  {sign} \odot 2^{-\text{sca...
+
+! Undefined control sequence.
+l.95 ...boldsymbol{x}\,\text{sign} \odot 2^{-\text
+                                                  {scale}}\). All values are...
+
+[3]
+! Undefined control sequence.
+l.98 ...s, adds Gaussian DP noise (\(\sigma_{\text
+                                                  {dp}}\) chosen for \(\vare...
+
+! Undefined control sequence.
+l.116 ... RAM (CubeIDE) and energy per sample (\si
+                                                  {\micro\joule})
+! Undefined control sequence.
+l.116 ...ubeIDE) and energy per sample (\si{\micro
+                                                  \joule})
+! Undefined control sequence.
+l.116 ...) and energy per sample (\si{\micro\joule
+                                                  })
+! Undefined control sequence.
+l.124 ... bits with $k=5$, DP noise $\sigma_{\text
+                                                  {dp}}\approx1.2$, young/ma...
+
+[4]
+! Undefined control sequence.
+l.127 \newcolumntype
+                    {Y}{>{\raggedright\arraybackslash}X}
+! Undefined control sequence.
+l.127 ...lumntype{Y}{>{\raggedright\arraybackslash
+                                                  }X}
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \begin{table}[H]
+                      
+
+! LaTeX Error: Environment tabularx undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.136 \begin{tabularx}
+                      {\textwidth}{cYYY}
+! Missing number, treated as zero.
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.136 \begin{tabularx}{\textwidth}
+                                  {cYYY}
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.137 \hline
+            
+! Misplaced alignment tab character &.
+l.138 Task &
+             SVHN & CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN &
+                    CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 &
+                               CIFAR-20 & Tiny-IN-20\\
+! Misplaced alignment tab character &.
+l.138 Task & SVHN & CIFAR-10 & CIFAR-20 &
+                                          Tiny-IN-20\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.139 \hline
+            
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) &
+                   10.16 & 10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 &
+                           10.74 & 10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 &
+                                   10.42 & 8.98\\
+! Misplaced alignment tab character &.
+l.140 Top-1 (\%) & 10.16 & 10.74 & 10.42 &
+                                           8.98\\
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.141 \hline
+            
+
+! LaTeX Error: \begin{table} on input line 134 ended by \end{tabularx}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 \end{tabularx}
+                    
+! Undefined control sequence.
+l.150 ...ence samples at 80\,MHz consumed 2.3\,\si
+                                                  {\micro\joule} per sample;...
+
+! Undefined control sequence.
+l.150 ...mples at 80\,MHz consumed 2.3\,\si{\micro
+                                                  \joule} per sample; the fi...
+
+! Undefined control sequence.
+l.150 ...at 80\,MHz consumed 2.3\,\si{\micro\joule
+                                                  } per sample; the first 10...
+
+
+! LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 \begin{figure}[H]
+                       
+! Undefined control sequence.
+l.154     \includegraphics
+                          [width=0.7\linewidth]{ images/accuracy.pdf }
+! Missing number, treated as zero.
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   ]
+l.154     \includegraphics[width=0.7\linewidth]
+                                               { images/accuracy.pdf }
+(./paper.bbl [5]
+
+Package natbib Warning: Empty `thebibliography' environment on input line 8.
+
+) [6] [7] (./paper.aux) )
+(see the transcript file for additional information) </home/runner/.texlive2023
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/urw/times/utmr8a.pfb>
+Output written on paper.pdf (7 pages, 162682 bytes).
+Transcript written on paper.log.
