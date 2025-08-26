@@ -6,5 +6,82 @@
     "diffusion model speedup",
     "hierarchical latent diffusion",
     "diffusion model distillation"
+  ],
+  "research_study_list": [
+    {
+      "title": "Simple Hierarchical Planning with Diffusion"
+    },
+    {
+      "title": "Hyperbolic Diffusion Embedding and Distance for Hierarchical Representation Learning"
+    },
+    {
+      "title": "Hierarchical Integration Diffusion Model for Realistic Image Deblurring"
+    },
+    {
+      "title": "Coarse-to-Fine: a Hierarchical Diffusion Model for Molecule Generation in 3D"
+    },
+    {
+      "title": "Faster Local Solvers for Graph Diffusion Equations"
+    },
+    {
+      "title": "Learning multi-scale local conditional probability models of images"
+    },
+    {
+      "title": "Learning multi-scale local conditional probability models of images"
+    },
+    {
+      "title": "Improving Training Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architecture"
+    },
+    {
+      "title": "Generative Powers of Ten"
+    },
+    {
+      "title": "Faster Local Solvers for Graph Diffusion Equations"
+    },
+    {
+      "title": "A Simple Early Exiting Framework for Accelerated Sampling in Diffusion Models"
+    },
+    {
+      "title": "Leveraging Early-Stage Robustness in Diffusion Models for Efficient and High-Quality Image Synthesis"
+    },
+    {
+      "title": "Faster Diffusion: Rethinking the Role of the Encoder for Diffusion Model Inference"
+    },
+    {
+      "title": "Training-Free Adaptive Diffusion with Bounded Difference Approximation Strategy"
+    },
+    {
+      "title": "Wavelet Diffusion Models Are Fast and Scalable Image Generators"
+    },
+    {
+      "title": "InfoDiffusion: Representation Learning Using Information Maximizing Diffusion Models"
+    },
+    {
+      "title": "Hierarchical Integration Diffusion Model for Realistic Image Deblurring"
+    },
+    {
+      "title": "HiCo: Hierarchical Controllable Diffusion Model for Layout-to-image Generation"
+    },
+    {
+      "title": "Latent Diffusion for Language Generation"
+    },
+    {
+      "title": "Solving Linear Inverse Problems Provably via Posterior Sampling with Latent Diffusion Models"
+    },
+    {
+      "title": "EM Distillation for One-step Diffusion Models"
+    },
+    {
+      "title": "Multistep Distillation of Diffusion Models via Moment Matching"
+    },
+    {
+      "title": "Data-free Distillation of Diffusion Models with Bootstrapping"
+    },
+    {
+      "title": "Plug-and-Play Diffusion Distillation"
+    },
+    {
+      "title": "One-step Diffusion with Distribution Matching Distillation"
+    }
   ]
 }
