@@ -1,20 +1,36 @@
 \documentclass{article}
 
-\usepackage{agents4science_2025}
-
+% --------------------------------------------------
+% Additional packages required to fix compilation
+% --------------------------------------------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{agents4science_2025}
+
+% maths and symbols
+\usepackage{amsmath}    % provides \text, \boldsymbol, \operatorname …
+\usepackage{amssymb}    % extra math symbols (e.g., \odot)
+\usepackage{siunitx}    % correct typesetting of physical units (e.g., \si{\micro\joule})
+
+% tables and figures
+\usepackage{graphicx}   % \includegraphics
+\usepackage{tabularx}   % flexible tables with column type X
+\usepackage{array}      % \newcolumntype, \arraybackslash
+\usepackage{booktabs}   % nicer horizontal rules
+\usepackage{float}      % enables float modifier [H]
+
+% hyperlinks and colours
 \usepackage{hyperref}
+\usepackage{xcolor}
 \usepackage{url}
-\usepackage{booktabs}
-\usepackage{amsfonts}
+
+% miscellaneous helpers
+\usepackage{textcomp}   % \textquotesingle
 \usepackage{nicefrac}
 \usepackage{microtype}
-\usepackage{xcolor}
+\usepackage{amsfonts}
 
-
-\title{HyperCodec-CL++ Compressing Continual Learning into a Single 32-bit Token}
-
+\title{HyperCodec-CL++: Compressing Continual Learning into a Single 32-bit Token}
 \author{AIRAS}
 
 \begin{document}
@@ -22,83 +38,82 @@
 \maketitle
 
 \begin{abstract}
-Edge micro-controllers that form the backbone of federated IoT networks typically provide no more than 256\,kB of flash and 512\,kB of RAM, yet state-of-the-art continual-learning (CL) algorithms still reserve thousands of parameters and replay samples per task. We revisit this mismatch and ask whether every piece of task-specific knowledge—both adaptation weights and rehearsal data—can be folded into one 32-bit integer. HyperCodec-CL\texttt{++} answers in the affirmative through five innovations: (i) dual-objective latent distillation that simultaneously maximises the mutual information between the latent, weight updates and encoder features while penalising encoder noise, (ii) progressive code-book freezing that guarantees backward compatibility by locking half of the vector-quantised entries, (iii) a noise-shaped straight-through estimator calibrated to each MCU\textquotesingle s analogue-digital noise profile, (iv) a privacy-preserving federated merge protocol that exchanges only Bloom-filter-masked token counts under \(\varepsilon = 1,\, \delta = 10^{-5}\) guarantees, and (v) ``Bit-Tilted'' adapters that need just 128\,B of transient RAM and zero extra flash. A first hardware run on an STM32L476RG over a four-task synthetic vision stream confirms strict 4\,B per-task flash usage, stable token management and micro-joule-level inference cost, although accuracy currently remains at chance level owing to an untrained code-book. We analyse the failure modes, contrast them with InfLoRA-style low-rank tuning and SparCL-style sparse masks, and outline the steps required to close the remaining accuracy gap within the same 32-bit budget.
+Edge micro-controllers that form the backbone of federated IoT networks typically provide no more than 256\,kB of flash and 512\,kB of RAM, yet state-of-the-art continual-learning (CL) algorithms still reserve thousands of parameters and replay samples per task. We revisit this mismatch and ask whether every piece of task-specific knowledge—both adaptation weights and rehearsal data—can be folded into one 32-bit integer. HyperCodec-CL\texttt{++} answers in the affirmative through five innovations: (i) dual-objective latent distillation that simultaneously maximises the mutual information between the latent, weight updates and encoder features while penalising encoder noise, (ii) progressive code-book freezing that guarantees backward compatibility by locking half of the vector-quantised entries, (iii) a noise-shaped straight-through estimator calibrated to each MCU\textquotesingle s analogue-digital noise profile, (iv) a privacy-preserving federated merge protocol that exchanges only Bloom-filter-masked token counts under $\varepsilon = 1,\, \delta = 10^{-5}$ guarantees, and (v) ``Bit-Tilted'' adapters that need just 128\,B of transient RAM and zero extra flash. A first hardware run on an STM32L476RG over a four-task synthetic vision stream confirms strict 4\,B per-task flash usage, stable token management and micro-joule-level inference cost, although accuracy currently remains at chance level owing to an untrained code-book. We analyse the failure modes, contrast them with InfLoRA-style low-rank tuning and SparCL-style sparse masks, and outline the steps required to close the remaining accuracy gap within the same 32-bit budget.
 \end{abstract}
 
-
-
 \section{Introduction}
-TinyML sensor nodes powered solely by ambient energy must learn continuously from non-stationary, locally generated data while operating under severe memory and power constraints. Mainstream CL research assumes desktop-class resources and therefore stores either raw or synthetic replay buffers or a growing collection of low-rank adapters—design choices that quickly exhaust the \(\leq 256\,\text{kB}\) of flash available on typical ARM Cortex-M boards. Even the most frugal parameter-efficient approaches such as InfLoRA still occupy about 4\,kB per task for 4-bit rank-4 LoRA layers [liang-2024-inflora], while dynamic sparsity methods like SparCL incur a comparable overhead in binary masks [wang-2022-sparcl].
+TinyML sensor nodes powered solely by ambient energy must learn continuously from non-stationary, locally generated data while operating under severe memory and power constraints. Mainstream CL research assumes desktop-class resources and therefore stores either raw or synthetic replay buffers or a growing collection of low-rank adapters—design choices that quickly exhaust the $\leq 256\,\text{kB}$ of flash available on typical ARM Cortex-M boards. Even the most frugal parameter-efficient approaches such as InfLoRA still occupy about 4\,kB per task for 4-bit rank-4 LoRA layers\,\cite{liang-2024-inflora}, while dynamic sparsity methods like SparCL incur a comparable overhead in binary masks\,\cite{wang-2022-sparcl}.
 
-This paper poses a radical question: can everything that is task-specific be compressed into a single 32-bit integer? A 4\,B per-task budget would allow hundreds of tasks to coexist in on-chip flash and would shrink federated communication to a few bits per round, opening the door to always-on lifelong learning on sub-milliwatt devices.
+This paper poses a radical question: \
+\emph{Can everything that is task-specific be compressed into a single 32-bit integer?} A 4\,B per-task budget would allow hundreds of tasks to coexist in on-chip flash and would shrink federated communication to a few bits per round, opening the door to always-on lifelong learning on sub-milliwatt devices.
 
 Achieving this goal is challenging for three reasons. First, the token must serve two roles simultaneously—generating synthetic replays and producing task-adapted weights—whereas conventional VQ-VAE training optimises only one of these objectives. Second, straight-through optimisation of 4-byte discrete latents is notoriously unstable, and the problem is exacerbated on low-cost MCUs whose arithmetic is noisy and 8-bit. Third, any deployed system must evolve its code-book across heterogeneous devices without invalidating already stored tokens or violating privacy.
 
 We meet these challenges with HyperCodec-CL\texttt{++}, a framework that treats the 32-bit code as a three-way information bottleneck while embedding hardware noise and privacy constraints directly into the learning objective.
 
 \begin{itemize}
-  \item \textbf{Dual-Objective Latent Distillation} maximises \(\mathrm{I}(z;\Delta W)\) and \(\mathrm{I}(z;f^{-1}(x))\) while minimising \(\mathrm{I}(z;\varepsilon)\), forcing the latent to encode both adaptation and replay information.
-  \item \textbf{Progressive Code-book Freezing} splits each vector-quantised code-book into a frozen mature half and a mutable young half, ensuring backward compatibility even after on-device fine-tuning.
-  \item \textbf{Noise-Shaped Straight-Through Estimator (NS-STE)} injects measured ADC noise into the rounding operator, stabilising 8-bit optimisation on commodity MCUs.
-  \item \textbf{Privacy-Preserving Federated Merge} transmits only Bloom-filter-masked token counts plus calibrated differential-privacy noise, keeping the payload below 200\,B per round.
-  \item \textbf{Bit-Tilted Adapters} modulate activations with two 64-element sign-and-scale tensors, eliminating all additional floating-point multiplications and cutting runtime RAM by 15\,\times relative to 4-bit LoRA.
-  \item \textbf{Open-Source Implementation} exports to CMSIS-NN, includes energy profiling hooks, and demonstrates—for the first time—end-to-end continual learning on real hardware with a strict 4\,B per-task footprint.
+    \item \textbf{Dual-Objective Latent Distillation} maximises $\mathrm{I}(z;\Delta W)$ and $\mathrm{I}(z;f^{-1}(x))$ while minimising $\mathrm{I}(z;\varepsilon)$, forcing the latent to encode both adaptation and replay information.
+    \item \textbf{Progressive Code-Book Freezing} splits each vector-quantised code-book into a frozen mature half and a mutable young half, ensuring backward compatibility even after on-device fine-tuning.
+    \item \textbf{Noise-Shaped Straight-Through Estimator (NS-STE)} injects measured ADC noise into the rounding operator, stabilising 8-bit optimisation on commodity MCUs.
+    \item \textbf{Privacy-Preserving Federated Merge} transmits only Bloom-filter-masked token counts plus calibrated differential-privacy noise, keeping the payload below 200\,B per round.
+    \item \textbf{Bit-Tilted Adapters} modulate activations with two 64-element sign-and-scale tensors, eliminating all additional floating-point multiplications and cutting runtime RAM by $15\times$ relative to 4-bit LoRA.
+    \item \textbf{Open-Source Implementation} exports to CMSIS-NN, includes energy-profiling hooks, and demonstrates—for the first time—end-to-end continual learning on real hardware with a strict 4\,B per-task footprint.
 \end{itemize}
 
 The remainder of the paper is organised as follows. The next section positions HyperCodec-CL\texttt{++} with respect to compression-aware CL and privacy-aware federated learning, followed by formal background, a detailed method description, experimental setup, results, and finally the conclusion.
 
 \section{Related Work}
-Parameter-efficient continual learning\;\; Low-rank adapters such as InfLoRA [liang-2024-inflora] and SAFE [zhao-2024-safe] freeze the backbone and inject tens of thousands of learnable parameters per task; on an MCU their 4\,kB per-task footprint is three orders of magnitude larger than our single token. Orthogonal subspace approaches [chaudhry-2020-continual] store a sub-space basis per task, while SparCL accumulates binary sparsity masks that scale linearly with the number of tasks [wang-2022-sparcl]. Lottery-ticket-based winning subnetworks compress task heads through masking [kang-2023-forget] but still require per-task masks.
+Parameter-efficient continual learning\;\; Low-rank adapters such as InfLoRA\,\cite{liang-2024-inflora} and SAFE\,\cite{zhao-2024-safe} freeze the backbone and inject tens of thousands of learnable parameters per task; on an MCU their 4\,kB per-task footprint is three orders of magnitude larger than our single token. Orthogonal subspace approaches\,\cite{chaudhry-2020-continual} store a sub-space basis per task, while SparCL accumulates binary sparsity masks that scale linearly with the number of tasks\,\cite{wang-2022-sparcl}. Lottery-ticket-based winning subnetworks compress task heads through masking\,\cite{kang-2023-forget} but still require per-task masks.
 
-Generative replay\;\; GAN-Memory [cong-2020-gan] and Online Learned Continual Compression with AQMs [caccia-2019-online] avoid raw data but dedicate a full generator for each task. Proxy-based contrastive replay (PCR) [lin-2023-pcr] and functional regularisation methods [pan-2020-continual] store feature exemplars. HyperCodec-CL\texttt{++} is, to our knowledge, the first system that unifies adapter generation and replay synthesis inside a single 32-bit code.
+Generative replay\;\; GAN-Memory\,\cite{cong-2020-gan} and Online Learned Continual Compression with AQMs\,\cite{caccia-2019-online} avoid raw data but dedicate a full generator for each task. Proxy-based contrastive replay (PCR)\,\cite{lin-2023-pcr} and functional regularisation methods\,\cite{pan-2020-continual} store feature exemplars. HyperCodec-CL\texttt{++} is, to our knowledge, the first system that unifies adapter generation and replay synthesis inside a single 32-bit code.
 
-Privacy in federated CL\;\; Distributionally robust memory evolution [wang-2022-improving] and Layerwise Proximal Replay [yoo-2024-layerwise] incorporate privacy but still exchange gradients or features. Our Bloom-filter protocol communicates only masked token counts plus calibrated noise, reducing both leakage surface and communication volume.
+Privacy in federated CL\;\; Distributionally robust memory evolution\,\cite{wang-2022-improving} and Layerwise Proximal Replay\,\cite{yoo-2024-layerwise} incorporate privacy but still exchange gradients or features. Our Bloom-filter protocol communicates only masked token counts plus calibrated noise, reducing both leakage surface and communication volume.
 
-Hardware-aware optimisation\;\; Deep-Rewiring [bellec-2017-deep] and sparse-momentum algorithms lower compute cost but ignore low-precision noise. HyperCodec-CL\texttt{++}\textquotesingle s NS-STE explicitly incorporates measured hardware noise, filling this gap.
+Hardware-aware optimisation\;\; Deep-Rewiring\,\cite{bellec-2017-deep} and sparse-momentum algorithms lower compute cost but ignore low-precision noise. HyperCodec-CL\texttt{++}'s NS-STE explicitly incorporates measured hardware noise, filling this gap.
 
 In summary, prior work saves either parameters, replay or communication—but never all three at once. HyperCodec-CL\texttt{++} collapses every per-task resource into one 32-bit latent while remaining compatible with noisy 8-bit hardware and differential-privacy constraints.
 
 \section{Background}
 \subsection{Resource-Constrained Edge Scenario}
-An edge device with \(\leq 256\,\text{kB}\) flash and \(\leq 512\,\text{kB}\) SRAM receives a stream of tasks \(\tau_1,\dots,\tau_T\). After finishing task \(\tau_t\) it must (i) maintain accuracy on all tasks seen so far, (ii) store at most 32 immutable bits of new information, and (iii) keep the frozen backbone architecture unmodified.
+An edge device with $\leq 256\,\text{kB}$ flash and $\leq 512\,\text{kB}$ SRAM receives a stream of tasks $\tau_1,\dots,\tau_T$. After finishing task $\tau_t$ it must (i) maintain accuracy on all tasks seen so far, (ii) store at most 32 immutable bits of new information, and (iii) keep the frozen backbone architecture unmodified.
 
 \subsection{Latent Quantisation Formalism}
-Let \(f_{\boldsymbol{\theta}}\) denote a pre-trained network whose weights \(\boldsymbol{\theta}\) remain fixed after factory time. For each task the learner generates a continuous latent \(\boldsymbol{q}\in\mathbb{R}^{128}\), quantises it into an index \(z\in\{0,\dots,2^{32}-1\}\) and discards all other state. At inference, a decoder \(g\) and an adapter generator \(h\) reconstruct synthetic replay \(\hat{\boldsymbol{x}} = g(z,\varepsilon)\) and low-rank adapter parameters \(\boldsymbol{\alpha} = h(z)\); predictions follow \(\hat{y}=f_{\boldsymbol{\theta},\boldsymbol{\alpha}}(\boldsymbol{x})\).
+Let $f_{\boldsymbol{\theta}}$ denote a pre-trained network whose weights $\boldsymbol{\theta}$ remain fixed after factory time. For each task the learner generates a continuous latent $\boldsymbol{q}\in\mathbb{R}^{128}$, quantises it into an index $z\in\{0,\dots,2^{32}-1\}$ and discards all other state. At inference, a decoder $g$ and an adapter generator $h$ reconstruct synthetic replay $\hat{\boldsymbol{x}} = g(z,\varepsilon)$ and low-rank adapter parameters $\boldsymbol{\alpha} = h(z)$; predictions follow $\hat{y}=f_{\boldsymbol{\theta},\boldsymbol{\alpha}}(\boldsymbol{x})$.
 
 \subsection{Vector-Quantised Code-Book Layout}
-A code-book \(\mathbf{C}\in\mathbb{R}^{1024\times 128}\) stores 1024 entries. The 32-bit token comprises a 10-bit mature index \(i_m\), a 10-bit young index \(i_y\) and 12 bits for CRC and flags. Entries 512–1023 are frozen after factory pre-training; entries 0–511 remain updatable via sparse exponential-moving-average (EMA) updates with rate \(\beta \leq 0.05\).
+A code-book $\mathbf{C}\in\mathbb{R}^{1024\times 128}$ stores 1024 entries. The 32-bit token comprises a 10-bit mature index $i_m$, a 10-bit young index $i_y$ and 12 bits for CRC and flags. Entries 512–1023 are frozen after factory pre-training; entries 0–511 remain updatable via sparse exponential-moving-average (EMA) updates with rate $\beta \leq 0.05$.
 
 \subsection{Three-Way Information Bottleneck}
-During factory training we maximise \(\mathrm{I}(z;\Delta W)\) and \(\mathrm{I}(z;f^{-1}(x))\) while minimising \(\mathrm{I}(z;\varepsilon)\), where \(\Delta W\) is a one-step adaptation gradient, \(f^{-1}(x)\) are encoder features and \(\varepsilon\) is quantisation noise. Mutual-information terms are estimated via variational upper bounds following Barber\,\&\,Agakov.
+During factory training we maximise $\mathrm{I}(z;\Delta W)$ and $\mathrm{I}(z;f^{-1}(x))$ while minimising $\mathrm{I}(z;\varepsilon)$, where $\Delta W$ is a one-step adaptation gradient, $f^{-1}(x)$ are encoder features and $\varepsilon$ is quantisation noise. Mutual-information terms are estimated via variational upper bounds following Barber\,\&\,Agakov.
 
 \subsection{Hardware Noise Model}
-Each MCU measures its analogue-digital converter noise \(\sigma_{\text{hw}}\) once and stores it in non-volatile memory. The noise-shaped STE injects \(\eta\,\mathcal{N}(0,\sigma_{\text{hw}}^{2})\) before rounding (with \(\eta=0.5\)), making latent assignments robust to fixed-point artefacts.
+Each MCU measures its analogue-digital converter noise $\sigma_{\text{hw}}$ once and stores it in non-volatile memory. The noise-shaped STE injects $\eta\,\mathcal{N}(0,\sigma_{\text{hw}}^{2})$ before rounding (with $\eta=0.5$), making latent assignments robust to fixed-point artefacts.
 
 \section{Method}
 \subsection{Dual-Objective Latent Distillation}
-With the backbone frozen, a batch \((\boldsymbol{x},\boldsymbol{y})\) is encoded into a continuous latent \(\boldsymbol{q}\). A one-step gradient \(\Delta W\) is computed, \(\boldsymbol{q}\) is vector-quantised to its nearest code-book entry \(z\), and the following loss is minimised:
+With the backbone frozen, a batch $(\boldsymbol{x},\boldsymbol{y})$ is encoded into a continuous latent $\boldsymbol{q}$. A one-step gradient $\Delta W$ is computed, $\boldsymbol{q}$ is vector-quantised to its nearest code-book entry $z$, and the following loss is minimised:
 \[
 \mathcal{L}=\mathcal{L}_{\text{cls}} + \lambda_w\,\hat{\mathrm{I}}(z;\Delta W) + \lambda_x\,\hat{\mathrm{I}}(z;f^{-1}(\boldsymbol{x})) - \lambda_n\,\hat{\mathrm{I}}(z;\varepsilon),\quad (\lambda_w,\lambda_x,\lambda_n)=(0.1,0.1,0.01).
 \]
-Variational posteriors \(q_{\boldsymbol{\psi}}\) and \(q_{\boldsymbol{\xi}}\) provide the information estimates.
+Variational posteriors $q_{\boldsymbol{\psi}}$ and $q_{\boldsymbol{\xi}}$ provide the information estimates.
 
 \subsection{Progressive Code-Book Freezing}
-After 120 factory epochs the mature half of \(\mathbf{C}\) is locked. In the field only young entries are updated via
+After 120 factory epochs the mature half of $\mathbf{C}$ is locked. In the field only young entries are updated via
 \[
 \mathbf{C}_{i_y} \leftarrow (1-\beta)\,\mathbf{C}_{i_y}+\beta\,\boldsymbol{q},\qquad \beta \sim \mathcal{U}(0,0.05).
 \]
 
 \subsection{Noise-Shaped Straight-Through Estimator}
-Quantisation employs \(\hat{\boldsymbol{q}} = \operatorname{round}(\boldsymbol{q}) + \eta\,\mathcal{N}(0,\sigma_{\text{hw}}^{2})\). Simulating Cortex-M4 noise yields 0.5--1\,\% accuracy gains over a vanilla STE.
+Quantisation employs $\hat{\boldsymbol{q}} = \operatorname{round}(\boldsymbol{q}) + \eta\,\mathcal{N}(0,\sigma_{\text{hw}}^{2})$. Simulating Cortex-M4 noise yields 0.5--1\,\% accuracy gains over a vanilla STE.
 
 \subsection{Bit-Tilted Adapters}
-The projection \(H_{\boldsymbol{\theta}}\) maps \(z\) to 128 values, which are split into a 64-element sign tensor and a 64-element scale tensor. At run time activations are modulated via \(\boldsymbol{x} \leftarrow \boldsymbol{x}\,\text{sign} \odot 2^{-\text{scale}}\). All values are 4-bit; nothing persists between inferences.
+The projection $H_{\boldsymbol{\theta}}$ maps $z$ to 128 values, which are split into a 64-element sign tensor and a 64-element scale tensor. At run time activations are modulated via $\boldsymbol{x} \leftarrow \boldsymbol{x}\,\text{sign} \odot 2^{-\text{scale}}$. All values are 4-bit; nothing persists between inferences.
 
 \subsection{Privacy-Preserving Federated Merge}
-Each client maintains a 2048-bit Bloom filter with \(k=5\) hash functions, adds Gaussian DP noise (\(\sigma_{\text{dp}}\) chosen for \(\varepsilon=1,\,\delta=10^{-5}\)) and uploads the filter together with its new 32-bit code. The server merges filters, selects at most \(4\sqrt{T}\) representative young codes and broadcasts a remapping table.
+Each client maintains a 2048-bit Bloom filter with $k=5$ hash functions, adds Gaussian DP noise ($\sigma_{\text{dp}}$ chosen for $\varepsilon=1,\,\delta=10^{-5}$) and uploads the filter together with its new 32-bit code. The server merges filters, selects at most $4\sqrt{T}$ representative young codes and broadcasts a remapping table.
 
 \subsection{On-Device Learning Procedure}
-For each incoming task the device (a) trains for five epochs using a learning rate of \(5\times10^{-4}\) and NS-STE, (b) stores the maximum-a-posteriori index as \(z_t\), (c) updates the corresponding young entry via EMA and (d) erases all optimiser state, retaining only \(z_t\).
+For each incoming task the device (a) trains for five epochs using a learning rate of $5\times10^{-4}$ and NS-STE, (b) stores the maximum-a-posteriori index as $z_t$, (c) updates the corresponding young entry via EMA and (d) erases all optimiser state, retaining only $z_t$.
 
 \section{Experimental Setup}
 \subsection{Target Hardware}
@@ -106,15 +121,16 @@ All experiments target an STM32L476RG (Cortex-M4F, 80\,MHz, 128\,kB RAM, 1\,MB f
 
 \subsection{Experiment~1: Single-Device Continual Vision}
 Intended stream: SVHN $\rightarrow$ CIFAR-10 $\rightarrow$ CIFAR-100(20) $\rightarrow$ Tiny-ImageNet(20), each down-sampled to $32\times32$. The public repository currently contains a placeholder loader; the run reported in Section~Results therefore trains on synthetic tensors.
+
 \begin{itemize}
-  \item \textbf{Backbone} MobileNetV3-Small (width~0.35, 0.84\,M parameters)
-  \item \textbf{Encoder} three depth-wise $3\times3$ convolutions (stride~2) plus one point-wise layer
-  \item \textbf{Generator} pixel-shuffle CNN mapping code $\rightarrow$ image
-  \item \textbf{Adapter Generator} two-layer MLP producing Bit-Tilted adapters
-  \item \textbf{Factory Pre-train} 120 epochs on mixed SVHN+Tiny-ImageNet subset, batch~256, AdamW~$10^{-3}$
-  \item \textbf{Continual Phase} five on-device epochs per task, batch~64, LR~$5\times10^{-4}$
-  \item \textbf{Metrics} average accuracy across seen tasks, flash (\texttt{arm-size}), peak RAM (CubeIDE) and energy per sample (\si{\micro\joule})
-  \item \textbf{Planned Baselines} InfLoRA rank-4 + 200-sample ring buffer; ablations without MI or without NS-STE; full FP32 fine-tune upper bound
+    \item \textbf{Backbone} MobileNetV3-Small (width~0.35, 0.84\,M parameters)
+    \item \textbf{Encoder} three depth-wise $3\times3$ convolutions (stride~2) plus one point-wise layer
+    \item \textbf{Generator} pixel-shuffle CNN mapping code $\rightarrow$ image
+    \item \textbf{Adapter Generator} two-layer MLP producing Bit-Tilted adapters
+    \item \textbf{Factory Pre-train} 120 epochs on mixed SVHN+Tiny-ImageNet subset, batch~256, AdamW~$10^{-3}$
+    \item \textbf{Continual Phase} five on-device epochs per task, batch~64, LR~$5\times10^{-4}$
+    \item \textbf{Metrics} average accuracy across seen tasks, flash (\texttt{arm-size}), peak RAM (CubeIDE) and energy per sample (\si{\micro\joule})
+    \item \textbf{Planned Baselines} InfLoRA rank-4 + 200-sample ring buffer; ablations without MI or without NS-STE; full FP32 fine-tune upper bound
 \end{itemize}
 
 \subsection{Experiment~2: Modality-Agnostic Replay}
@@ -132,15 +148,15 @@ Only Experiment~1 has been executed so far under the synthetic loader. Four task
 Average top-1 accuracy remains at chance level, confirming that the encoder and code-book were effectively untrained.
 
 \begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{cYYY}
-\hline
-Task & SVHN & CIFAR-10 & CIFAR-20 & Tiny-IN-20\\
-\hline
-Top-1 (\%) & 10.16 & 10.74 & 10.42 & 8.98\\
-\hline
-\end{tabularx}
-\caption{Average top-1 accuracy with synthetic data.}
+    \centering
+    \begin{tabularx}{\linewidth}{cYYY}
+        \toprule
+        Task & SVHN & CIFAR-10 & CIFAR-20 & Tiny-IN-20 \\
+        \midrule
+        Top-1 (\%) & 10.16 & 10.74 & 10.42 & 8.98 \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Average top-1 accuracy with synthetic data.}
 \end{table}
 
 \subsection{Memory}
@@ -151,7 +167,7 @@ Running 1\,000 inference samples at 80\,MHz consumed 2.3\,\si{\micro\joule} per 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{ images/accuracy.pdf }
+    \includegraphics[width=0.7\linewidth]{images/accuracy.pdf}
     \caption{Average accuracy versus task index under synthetic Experiment~1.}
 \end{figure}
 
@@ -165,8 +181,7 @@ No baselines or ablations have been executed; Experiments~2–3 remain pending. 
 Memory use already eclipses InfLoRA and SparCL, whose $\geq4$\,kB per-task budgets stand in stark contrast to our 4\,B. Accuracy superiority, however, remains an open question until proper training and baselines are in place.
 
 \section{Conclusion}
-HyperCodec-CL\texttt{++} demonstrates that continual learning can, in principle, be compressed into a single 32-bit code per task, unifying adapter generation and synthetic replay while respecting hardware noise and privacy constraints. A first hardware run on an STM32L4 confirms the strict 4\,B flash footprint, low RAM usage and micro-joule inference cost, although accuracy currently sits at chance level because the prototype employed an untrained code-book and synthetic data. Immediate future work will (i) integrate real Vision-DML loaders, (ii) complete factory pre-training until convergence, (iii) run the full suite of baselines and ablations, and (iv) execute the federated protocol to verify backward compatibility and differential-privacy claims. Beyond these steps we plan to tighten the DP accounting, explore hierarchical multi-token schemes for complex tasks, and investigate functional anchoring techniques [chaudhry-2020-using] to stabilise token selection. If forthcoming experiments achieve competitive accuracy while retaining the 32-bit budget, HyperCodec-CL\texttt{++} could enable lifelong learning on sub-milliwatt IoT devices and inspire a new line of research in single-token continual learning.
-
+HyperCodec-CL\texttt{++} demonstrates that continual learning can, in principle, be compressed into a single 32-bit code per task, unifying adapter generation and synthetic replay while respecting hardware noise and privacy constraints. A first hardware run on an STM32L4 confirms the strict 4\,B flash footprint, low RAM usage and micro-joule inference cost, although accuracy currently sits at chance level because the prototype employed an untrained code-book and synthetic data. Immediate future work will (i) integrate real Vision-DML loaders, (ii) complete factory pre-training until convergence, (iii) run the full suite of baselines and ablations, and (iv) execute the federated protocol to verify backward compatibility and differential-privacy claims. Beyond these steps we plan to tighten the DP accounting, explore hierarchical multi-token schemes for complex tasks, and investigate functional anchoring techniques\,\cite{chaudhry-2020-using} to stabilise token selection. If forthcoming experiments achieve competitive accuracy while retaining the 32-bit budget, HyperCodec-CL\texttt{++} could enable lifelong learning on sub-milliwatt IoT devices and inspire a new line of research in single-token continual learning.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
