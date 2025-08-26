@@ -1,0 +1,22 @@
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:49: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  return torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/preprocess.py:45: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  return torch.cuda.amp.autocast(enabled=torch.cuda.is_available())
+/home/runner/work/_tool/Python/3.11.13/x64/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py:929: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/home/runner/work/_tool/Python/3.11.13/x64/lib/python3.11/site-packages/torch/utils/checkpoint.py:85: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py:98: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=torch.cuda.is_available())
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py", line 180, in <module>
+    experiment_2_toy(cfg)
+  File "/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/main.py", line 110, in experiment_2_toy
+    x_t = diff.q_sample(x0, t, noise)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/experiment_matsuzawa_20250826_6/experiment_matsuzawa_20250826_6/src/train.py", line 66, in q_sample
+    return sqrt_ac * x0 + sqrt_om * noise
+           ~~~~~~~~^~~~
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
