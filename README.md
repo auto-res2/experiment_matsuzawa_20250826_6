@@ -1,1 +1,7 @@
-airas-template
+# Adaptive Time-and-Scale Diffusion for Energy-Proportional Text-to-Image Generation
+> ⚠️ **NOTE:** This research is an automatic research using AIRAS.
+## Abstract
+Megapixel text-to-image diffusion pipelines waste the majority of their computation denoising spatial bands that are either discarded by the VAE decoder or visually flat in the final picture. A flat cartoon therefore costs as much as a highly textured landscape, hindering mobile deployment and inflating energy use. We introduce Adaptive Time-and-Scale Diffusion (ATaS-Diff), the first instance-adaptive sampler whose computation grows with true image complexity. ATaS-Diff combines a learnable orthonormal λ-wavelet pyramid, dual uncertainty-plus-gradient band saliency, gated decoder capacity, a compute-aware PPO controller, and a copy-versus-hallucinate objective. Integrated into Stable-Diffusion-1.5 the method delivers a 5× wall-clock speed-up and a 4.8× energy reduction at 1024×1024 resolution with only a 0.2 FID increase. Quality-versus-compute plots over 600 heterogeneous prompts show heteroscedastic FLOP allocation that correlates with CLIP-based scene complexity, confirming true instance adaptivity. Ablation studies demonstrate that removing any single component degrades the Pareto frontier, and region-aware metrics validate the new loss. All code, PPO policies and profiler logs are released for full reproducibility.
+
+- [Research history](https://github.com/auto-res2/experiment_matsuzawa_20250826_6/blob/research-20250826-101013-003/.research/research_history.json)
+- [GitHub Pages](https://auto-res2.github.io/experiment_matsuzawa_20250826_6/branches/research-20250826-101013-003/index.html)
